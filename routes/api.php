@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +18,7 @@ Route::get('/', function () {
     return response()->json(env("WEB_MES"));
 });
 
-Route::name("users.")->prefix('authors')->controller(AuthorController::class)->group(function () {
+Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
     Route::name("index")->get(null, 'index');
     Route::name("store")->post(null, 'store');
     Route::name("show")->get("{id}", 'show');
