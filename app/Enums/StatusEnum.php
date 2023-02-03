@@ -14,14 +14,15 @@ enum StatusEnum: string
             self::ACTIVE => [
                 "name" => "Aktif",
                 "thema" => "success",
-                "value" => self::ACTIVE->value
+                "value" => self::ACTIVE->value,
+                "bool" => true
             ],
             self::PASSIVE => [
                 "name" => "Pasif",
                 "thema" => "warning",
-                "value" => self::PASSIVE->value
+                "value" => self::PASSIVE->value,
+                "bool" => false
             ]
-
         };
     }
 
