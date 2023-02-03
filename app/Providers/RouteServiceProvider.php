@@ -36,6 +36,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::fallback(function () {
+            return response()->json('Heyy Dostum !! Yolunu kaybettin sanırım ...', 404);
+        });
     }
 
     /**
