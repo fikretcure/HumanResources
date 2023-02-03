@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return response()->json(env("WEB_MES"));
 });
+
+Route::name("users.")->prefix('authors')->controller(AuthorController::class)->group(function () {
+    Route::name("index")->get(null, 'index');
+    Route::name("store")->post(null, 'store');
+    Route::name("show")->get("{id}", 'show');
+    Route::name("update")->delete("{id}", 'update');
+    Route::name("destroy")->put("{id}", 'destroy');
+});
