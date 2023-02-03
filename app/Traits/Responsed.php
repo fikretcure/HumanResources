@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Helpers\RouteNameEnum;
+use App\Enums\RouteNameEnum;
 use Illuminate\Http\JsonResponse;
 
 /**
