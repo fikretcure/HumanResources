@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum StatusEnum: int
+enum StatusEnum: string
 {
-    case ACTIVE = 1;
-    case PASSIVE = 0;
+    case ACTIVE = "active";
+    case PASSIVE = "passive";
 
 
     public function detail(): array
