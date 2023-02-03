@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\StatusEnum;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -36,6 +37,10 @@ class UserStoreRequest extends FormRequest
                 "required",
                 "email:rfc,dns",
                 Rule::unique(User::class)
+            ],
+            "status" => [
+                "required",
+                Rule::enum(StatusEnum::class)
             ],
         ];
     }
