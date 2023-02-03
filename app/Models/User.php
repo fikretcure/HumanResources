@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+
 
 /**
  *
@@ -38,7 +40,13 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $appends = [
+        'full_name',
     ];
 
     /**
@@ -55,4 +63,22 @@ class User extends Authenticatable
      * @var string
      */
     public static string $reg_code = "K";
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return $this->name.' '.$this->surname;
+    }
+
+    /**
+     * @return Attribute
+     */
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => Hash::make($value),
+        );
+    }
 }
