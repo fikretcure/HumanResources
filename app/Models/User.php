@@ -54,5 +54,5 @@ class User extends Authenticatable
     /**
      * @var string
      */
-    public static $reg_code = "K";
+    public static string $reg_code = "K";
 }
