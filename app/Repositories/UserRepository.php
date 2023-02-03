@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  *
  */
-class UserRepository
+class UserRepository extends Repository
 {
     /**
      * @var Builder
@@ -42,7 +42,7 @@ class UserRepository
     public function store(array $attributes): Builder|Model
     {
         return $this->model->create(
-            attributes: ["password" => rand(), "reg_code" => rand()] + $attributes
+            attributes: ["password" => rand(), "reg_code" => $this->generateRegCode(User::class)] + $attributes
         );
     }
 

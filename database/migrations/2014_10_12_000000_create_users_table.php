@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('status');
             $table->string('reg_code');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
