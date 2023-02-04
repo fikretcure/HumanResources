@@ -4,5 +4,5 @@
 
 
 <div>
-Sistemimizi kullanabilmen için , {{env("web_url")}}/password-created/{{$token}} adresinden şifreni oluşturabilirsin.
+Sistemimizi kullanabilmen için , {{env("web_url")}}/password-reset/{{$token}} adresinden şifreni oluşturabilirsin.
 </div>
