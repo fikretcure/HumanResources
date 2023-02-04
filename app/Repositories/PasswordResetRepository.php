@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 
 use App\Models\PasswordReset;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -56,9 +55,8 @@ class PasswordResetRepository extends Repository
      */
     public function show($uuid): Model|Builder
     {
-        $data = $this->model->with("user")->where("token", $uuid)->firstOrFail();
-        throw_if(Carbon::now()->diffInMinutes($data->created_at) >= 5, Exception::class, 'Şifre değiştirme token geçerlilik süresi bitmiştir');
-
+        $data = $this->model->with("user")->where("token", $uuid)->where("expired_at", ">=", now())->first();
+        throw_unless($data, Exception::class, 'Şifrenizi güncellemek için şifremi unuttum yönergelerini izlemelisiniz !');
         return $data;
     }
 
