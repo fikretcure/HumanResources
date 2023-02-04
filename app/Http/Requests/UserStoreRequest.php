@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\RoleEnum;
 use App\Enums\StatusEnum;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -41,6 +42,11 @@ class UserStoreRequest extends FormRequest
             "status" => [
                 "required",
                 Rule::enum(StatusEnum::class)
+            ],
+            "role_state" => [
+                "required",
+                Rule::enum(RoleEnum::class),
+                Rule::notIn([RoleEnum::superAdmin->value])
             ],
         ];
     }
