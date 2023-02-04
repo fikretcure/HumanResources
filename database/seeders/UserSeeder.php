@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            "name" => "Fikret",
-            "surname" => "Cüre",
-            "email" => "fikretcure@gmail.com",
+            "name" => "Süper",
+            "surname" => "Admin",
+            "email" => "superadmin@company.com",
             "password" => "123456",
             "status" => "active",
             "reg_code" => $this->generateRegCode(User::class),
