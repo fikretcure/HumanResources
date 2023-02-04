@@ -60,5 +60,14 @@ class PasswordResetRepository extends Repository
         return $data;
     }
 
+    /**
+     * @param $uuid
+     * @return mixed
+     */
+    public function destroy($uuid): mixed
+    {
+        return $this->model->where("token", $uuid)->delete();
+    }
+
 
 }
