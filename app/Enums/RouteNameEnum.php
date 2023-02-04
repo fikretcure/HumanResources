@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 enum RouteNameEnum: string
 {
     case users = "Kullanıcı";
+    case passwordReset = "Şifre Güncelleme";
 
     case index = "Listeleme";
     case store = "Ekleme";
