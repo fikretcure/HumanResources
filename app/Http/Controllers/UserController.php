@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserPasswordResetRequest;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Jobs\UserStoreMailJob;
 use App\Repositories\PasswordResetRepository;
 use App\Repositories\UserRepository;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Throwable;
 
 /**
@@ -28,12 +29,18 @@ class UserController extends Controller
     private PasswordResetRepository $passwordResetRepository;
 
     /**
+     * @var UserService
+     */
+    private UserService $userService;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->userRepository = new UserRepository();
         $this->passwordResetRepository = new PasswordResetRepository();
+        $this->userService = new UserService();
     }
 
     /**
@@ -73,24 +80,30 @@ class UserController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param UserUpdateRequest $request
      * @param $id
      * @return JsonResponse
+     * @throws Throwable
      */
-    public function update(Request $request, $id): JsonResponse
+    public function update(UserUpdateRequest $request, $id): JsonResponse
     {
-        return $this->success("test")->send();
+        $this->userService->checkSuperAdmin($id);
+        $this->userRepository->update($request->validated(), $id);
+
+        return $this->success()->send();
 
     }
 
     /**
      * @param $id
      * @return JsonResponse
+     * @throws Throwable
      */
     public function destroy($id): JsonResponse
     {
-        return $this->success("test")->send();
+        $this->userService->checkSuperAdmin($id);
 
+        return $this->success("test")->send();
     }
 
     /**
