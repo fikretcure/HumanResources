@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RoleEnum;
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -56,6 +57,16 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: fn($value) => StatusEnum::from($value)->detail(),
+        );
+    }
+
+    /**
+     * @return Attribute
+     */
+    protected function roleState(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => RoleEnum::from($value)->detail(),
         );
     }
 
