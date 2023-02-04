@@ -24,5 +24,5 @@ Route::name("users.")->prefix('users')->controller(UserController::class)->group
     Route::name("show")->get("{id}", 'show');
     Route::name("update")->put("{id}", 'update');
     Route::name("destroy")->delete("{id}", 'destroy');
-    Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset');
+    Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset')->whereUuid("uuid");
 });
