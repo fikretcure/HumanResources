@@ -22,6 +22,7 @@ Route::name("users.")->prefix('users')->controller(UserController::class)->group
     Route::name("index")->get(null, 'index');
     Route::name("store")->post(null, 'store');
     Route::name("show")->get("{id}", 'show');
-    Route::name("update")->delete("{id}", 'update');
-    Route::name("destroy")->put("{id}", 'destroy');
+    Route::name("update")->put("{id}", 'update');
+    Route::name("destroy")->delete("{id}", 'destroy');
+    Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset');
 });
