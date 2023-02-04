@@ -5,10 +5,10 @@ namespace App\Enums;
 /**
  *
  */
-enum StatusEnum: string
+enum StatusEnum: int
 {
-    case ACTIVE = "active";
-    case PASSIVE = "passive";
+    case ACTIVE = 1;
+    case PASSIVE = 0;
 
 
     /**
@@ -21,13 +21,11 @@ enum StatusEnum: string
                 "name" => "Aktif",
                 "thema" => "success",
                 "value" => self::ACTIVE->value,
-                "bool" => true
             ],
             self::PASSIVE => [
                 "name" => "Pasif",
                 "thema" => "warning",
                 "value" => self::PASSIVE->value,
-                "bool" => false
             ]
         };
     }
