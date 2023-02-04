@@ -2,12 +2,18 @@
 
 namespace App\Enums;
 
+/**
+ *
+ */
 enum StatusEnum: string
 {
     case ACTIVE = "active";
     case PASSIVE = "passive";
 
 
+    /**
+     * @return array
+     */
     public function detail(): array
     {
         return match ($this) {
