@@ -56,5 +56,22 @@ class UserRepository extends Repository
         return $this->model->findOrFail($id)->update($attributes);
     }
 
+    /**
+     * @param int $id
+     * @return Model|Collection|Builder|array
+     */
+    public function show(int $id): Model|Collection|Builder|array
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     * @return bool|mixed|null
+     */
+    public function destroy(int $id): mixed
+    {
+        return $this->model->findOrFail($id)->delete();
+    }
 
 }
