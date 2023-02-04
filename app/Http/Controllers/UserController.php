@@ -118,8 +118,8 @@ class UserController extends Controller
         $this->userRepository->update([
             "password" => $request->input("password")
         ], $passwordReset->user->id);
+        $this->passwordResetRepository->destroy($uuid);
 
         return $this->success()->send();
-
     }
 }
