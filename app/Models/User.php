@@ -81,7 +81,7 @@ class User extends Authenticatable
      */
     public function getFullNameAttribute(): string
     {
-        return $this->name.' '.$this->surname;
+        return $this->name . ' ' . $this->surname;
     }
 
     /**
@@ -90,7 +90,28 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => Hash::make($value),
+            set: fn($value) => Hash::make($value),
         );
     }
+
+    /**
+     * @return Attribute
+     */
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => str()->title($value),
+        );
+    }
+
+    /**
+     * @return Attribute
+     */
+    protected function surname(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => str()->title($value),
+        );
+    }
+
 }
