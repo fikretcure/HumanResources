@@ -56,7 +56,7 @@ class PasswordResetRepository extends Repository
      */
     public function show($uuid): Model|Builder
     {
-        $data = $this->model->where("token", $uuid)->firstOrFail();
+        $data = $this->model->with("user")->where("token", $uuid)->firstOrFail();
         throw_if(Carbon::now()->diffInMinutes($data->created_at) >= 5, Exception::class, 'Şifre değiştirme token geçerlilik süresi bitmiştir');
 
         return $data;
