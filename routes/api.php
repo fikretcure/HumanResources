@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return response()->json(env("WEB_MES"));
+    return response()->json(str()->of(env("WEB_MES"))->explode(","));
 });
 
 Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
