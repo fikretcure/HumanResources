@@ -29,18 +29,22 @@ class UserStoreRequest extends FormRequest
     {
         return [
             "name" => [
-                "required"
+                "required",
+                "string"
             ],
             "surname" => [
-                "required"
+                "required",
+                "string"
             ],
             "email" => [
                 "required",
+                "string",
                 "email:rfc,dns",
                 Rule::unique(User::class)
             ],
             "status" => [
                 "required",
+                "integer",
                 Rule::enum(StatusEnum::class)
             ],
             "role_state" => [
