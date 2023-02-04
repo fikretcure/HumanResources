@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserPasswordResetRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Jobs\UserStoreMailJob;
 use App\Repositories\PasswordResetRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 /**
  *
@@ -87,6 +89,23 @@ class UserController extends Controller
     public function destroy($id): JsonResponse
     {
         return $this->success("test")->send();
+
+    }
+
+    /**
+     * @param UserPasswordResetRequest $request
+     * @param $uuid
+     * @return JsonResponse
+     * @throws Throwable
+     */
+    public function passwordReset(UserPasswordResetRequest $request, $uuid): JsonResponse
+    {
+        $passwordReset = $this->passwordResetRepository->show($uuid);
+        $this->userRepository->update([
+            "password" => $request->input("password")
+        ], $passwordReset->user->id);
+
+        return $this->success()->send();
 
     }
 }
