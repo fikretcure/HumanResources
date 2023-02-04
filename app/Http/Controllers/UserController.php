@@ -75,8 +75,7 @@ class UserController extends Controller
      */
     public function show($id): JsonResponse
     {
-        return $this->success("test")->send();
-
+        return $this->success($this->userRepository->show($id))->send();
     }
 
     /**
@@ -103,7 +102,7 @@ class UserController extends Controller
     {
         $this->userService->checkSuperAdmin($id);
 
-        return $this->success("test")->send();
+        return $this->success($this->userRepository->destroy($id))->send();
     }
 
     /**
