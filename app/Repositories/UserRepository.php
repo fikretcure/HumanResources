@@ -46,5 +46,15 @@ class UserRepository extends Repository
         );
     }
 
+    /**
+     * @param array $attributes
+     * @param int $id
+     * @return bool|int
+     */
+    public function update(array $attributes, int $id): bool|int
+    {
+        return $this->model->findOrFail($id)->update($attributes);
+    }
+
 
 }
