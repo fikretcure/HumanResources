@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
+use App\Jobs\UserStoreMailJob;
+use App\Repositories\PasswordResetRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,11 +21,17 @@ class UserController extends Controller
     private UserRepository $userRepository;
 
     /**
+     * @var PasswordResetRepository
+     */
+    private PasswordResetRepository $passwordResetRepository;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->userRepository = new UserRepository();
+        $this->passwordResetRepository = new PasswordResetRepository();
     }
 
     /**
@@ -40,7 +48,15 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request): JsonResponse
     {
-        return $this->success($this->userRepository->store($request->validated()))->send();
+        $createdData = $this->userRepository->store($request->validated());
+        $token = (string)str()->uuid();
+        $this->passwordResetRepository->store([
+            "email" => $request->validated("email"),
+            "token" => $token
+        ]);
+        UserStoreMailJob::dispatch($request->validated() + ["token" => $token]);
+
+        return $this->success($createdData)->send();
     }
 
     /**
