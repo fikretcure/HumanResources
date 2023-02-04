@@ -54,7 +54,8 @@ class UserController extends Controller
         $token = (string)str()->uuid();
         $this->passwordResetRepository->store([
             "email" => $request->validated("email"),
-            "token" => $token
+            "token" => $token,
+            "expired_at" => now()->addHours(2)
         ]);
         UserStoreMailJob::dispatch($request->validated() + ["token" => $token]);
 
