@@ -37,12 +37,12 @@ class UserRepository extends Repository
 
     /**
      * @param array $attributes
-     * @return Builder|Model
+     * @return Model|Builder
      */
     public function store(array $attributes): Builder|Model
     {
         return $this->model->create(
-            attributes: ["password" => rand(), "reg_code" => $this->generateRegCode(User::class)] + $attributes
+            attributes: ["reg_code" => $this->generateRegCode(User::class)] + $attributes
         );
     }
 
