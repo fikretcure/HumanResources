@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AuthenticationMiddleware;
+use App\Http\Middleware\AuthorizationMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +20,14 @@ Route::get('/', function () {
     return response()->json(str()->of(env("WEB_MES"))->explode(","));
 })->name("home.index");
 
-Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
-    Route::name("index")->get(null, 'index');
-    Route::name("store")->post(null, 'store');
-    Route::name("show")->get("{id}", 'show');
-    Route::name("update")->put("{id}", 'update');
-    Route::name("destroy")->delete("{id}", 'destroy');
-    Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset')->whereUuid("uuid");
+
+Route::middleware(AuthenticationMiddleware::class)->group(function () {
+    Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
+        Route::name("index")->get(null, 'index');
+        Route::name("store")->post(null, 'store');
+        Route::name("show")->get("{id}", 'show');
+        Route::name("update")->put("{id}", 'update');
+        Route::name("destroy")->delete("{id}", 'destroy');
+        Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset')->whereUuid("uuid");
+    });
 });
