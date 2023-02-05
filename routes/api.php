@@ -22,16 +22,21 @@ Route::get('/', function () {
 })->name("home.index");
 
 
-Route::middleware(AuthorizationMiddleware::class)->middleware(AuthenticationMiddleware::class)->group(function () {
-    Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
-        Route::name("index")->get(null, 'index');
-        Route::name("store")->post(null, 'store');
-        Route::name("show")->get("{id}", 'show');
-        Route::name("update")->put("{id}", 'update');
-        Route::name("destroy")->delete("{id}", 'destroy');
-        Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset')->whereUuid("uuid");
+Route::middleware(AuthenticationMiddleware::class)->group(function () {
+    Route::middleware(AuthorizationMiddleware::class)->group(function () {
+        //
+        Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
+            Route::name("index")->get(null, 'index');
+            Route::name("store")->post(null, 'store');
+            Route::name("show")->get("{id}", 'show');
+            Route::name("update")->put("{id}", 'update');
+            Route::name("destroy")->delete("{id}", 'destroy');
+        });
+        //
     });
 });
+
+Route::name("users.passwordReset")->put("users/password-reset/{uuid}", [UserController::class, 'passwordReset'])->whereUuid("uuid");
 
 Route::name("auth.")->prefix('auth')->controller(AuthController::class)->group(function () {
     Route::name("login")->post("login", 'login');
