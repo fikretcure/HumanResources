@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name("home.index");
 
 
-Route::middleware(AuthenticationMiddleware::class)->group(function () {
+Route::middleware(AuthorizationMiddleware::class)->middleware(AuthenticationMiddleware::class)->group(function () {
     Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
         Route::name("index")->get(null, 'index');
         Route::name("store")->post(null, 'store');
