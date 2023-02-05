@@ -96,7 +96,10 @@ trait Responsed
             "info" => RouteNameEnum::generateInfoMes() . " " . $this->info_message,
             "message" => $this->message ?? null,
             "data" => $this->data ?? null,
-        ], $this->status);
+        ], $this->status)->withHeaders([
+            "bearrer" => request()->bearrer,
+            "refresh" => request()->refresh,
+        ]);
 
     }
 }
