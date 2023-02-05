@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         User::create([
             "name" => "Süper",
             "surname" => "Admin",
-            "email" => "superadmin@company.com",
+            "email" => "fikretcure@yandex.com",
             "password" => "Admin-2023",
             "status" => 1,
             "reg_code" => $this->generateRegCode(User::class),
