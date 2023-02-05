@@ -39,6 +39,10 @@ class AuthLoginRequest extends FormRequest
                     ->numbers()
                     ->symbols()
             ],
+            "remember_me" => [
+                'required',
+                "boolean"
+            ]
         ];
     }
 }
