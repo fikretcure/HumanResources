@@ -2,21 +2,31 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\Responsed;
 use Closure;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ *
+ */
 class AuthorizationMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
-    public function handle(Request $request, Closure $next)
-    {
+    use Responsed;
 
-        return $next($request);
+    /**
+     * @param Request $request
+     * @param Closure $next
+     * @return JsonResponse|mixed
+     */
+    public function handle(Request $request, Closure $next): mixed
+    {
+        if (env("APP_ENV") == "local") {
+            Auth::loginUsingId(1);
+            return $next($request);
+        }
+
+        return $this->failMes("Yetki Geçersiz")->send(401);
     }
 }
