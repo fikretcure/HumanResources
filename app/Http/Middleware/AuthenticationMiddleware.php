@@ -36,6 +36,7 @@ class AuthenticationMiddleware
 
         if (now()->lessThanOrEqualTo($token->bearrer_expired_at)) {
             (new RequestMerge())->addToken($request->header("bearrer"), $request->header("refresh"));
+            Auth::loginUsingId($token->user_id);
 
             return $next($request);
         }
@@ -47,6 +48,7 @@ class AuthenticationMiddleware
                 "bearrer" => $bearrer,
                 "bearrer_expired_at" => now()->addMinutes(5),
             ]);
+            Auth::loginUsingId($token->user_id);
 
             return $next($request);
         }
