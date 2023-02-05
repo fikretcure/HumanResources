@@ -5,29 +5,28 @@ namespace App\Http\Middleware;
 use App\Traits\Responsed;
 use Closure;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ *
+ */
 class AuthenticationMiddleware
 {
     use Responsed;
+
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (Response|RedirectResponse)  $next
+     * @param Request $request
+     * @param Closure $next
      * @return JsonResponse
      */
     public function handle(Request $request, Closure $next): JsonResponse
     {
-
-        if(env("APP_ENV")=="local"){
+        if (env("APP_ENV") == "local") {
+            Auth::loginUsingId(1);
             return $next($request);
-
         }
 
         return $this->failMes("Token Geçersiz")->send(403);
-
     }
 }
