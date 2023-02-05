@@ -22,4 +22,9 @@ class Token extends Model
         "refresh",
         "refresh_expired_at"
     ];
+
+    protected $casts = [
+        "bearrer_expired_at" => "datetime",
+        "refresh_expired_at" => "datetime",
+    ];
 }
