@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RequestMerge;
 use App\Http\Requests\AuthLoginRequest;
 use App\Mail\AuthLoginShipped;
 use App\Repositories\TokenRepository;
@@ -47,15 +48,13 @@ class AuthController extends Controller
         if (Hash::check($request->password, $user->password)) {
             $bearrer = str()->uuid();
             $refresh = str()->uuid();
-            $request->merge([
-                'bearrer' => $bearrer,
-                'refresh' => $refresh,
-            ]);
+            (new RequestMerge())->addToken($bearrer, $refresh);
+
             $this->tokenRepository->store([
                 "bearrer" => $bearrer,
                 "bearrer_expired_at" => now()->addMinutes(5),
                 "refresh" => $refresh,
-                "refresh_expired_at" => now()->addHours(1),
+                "refresh_expired_at" => $request->input("remember_me") ? now()->addDay(5) : now()->addHours(5),
                 "user_id" => $user->id
             ]);
             Mail::to($request->input("email"))->queue(new AuthLoginShipped($user));
