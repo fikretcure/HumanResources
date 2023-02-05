@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             "name" => "Süper",
             "surname" => "Admin",
             "email" => "superadmin@company.com",
-            "password" => "123456",
+            "password" => "Admin-2023",
             "status" => 1,
             "reg_code" => $this->generateRegCode(User::class),
             "role_state" => 1
