@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthenticationMiddleware;
 use App\Http\Middleware\AuthorizationMiddleware;
@@ -30,4 +31,9 @@ Route::middleware(AuthorizationMiddleware::class)->middleware(AuthenticationMidd
         Route::name("destroy")->delete("{id}", 'destroy');
         Route::name("passwordReset")->put("password-reset/{uuid}", 'passwordReset')->whereUuid("uuid");
     });
+});
+
+Route::name("auth.")->prefix('auth')->controller(AuthController::class)->group(function () {
+    Route::name("login")->post("login", 'login');
+    Route::name("checkToken")->post("check-token", 'checkToken');
 });
