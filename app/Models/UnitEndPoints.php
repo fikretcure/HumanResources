@@ -21,4 +21,8 @@ class UnitEndPoints extends Model
         "end_point_slug"
     ];
 
+    /**
+     * @var string
+     */
+    public static string $reg_code = "E";
 }
