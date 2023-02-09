@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EndPointController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UnitEndPointsController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthenticationMiddleware;
 use App\Http\Middleware\AuthorizationMiddleware;
@@ -30,6 +31,7 @@ Route::middleware(AuthenticationMiddleware::class)->group(function () {
         Route::apiResources([
             'users' => UserController::class,
             'units' => UnitController::class,
+            'unit-end-points' => UnitEndPointsController::class,
         ]);
 
         Route::name("endPoints.index")->get("end-points", EndPointController::class);
