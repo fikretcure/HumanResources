@@ -29,7 +29,7 @@ class UnitRepository extends Repository
      */
     public function __construct()
     {
-        $this->model = Unit::query();
+        $this->model = Unit::query()->with("children","parent");
         $this->model_class = Unit::class;
     }
 
