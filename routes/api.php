@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EndPointController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthenticationMiddleware;
 use App\Http\Middleware\AuthorizationMiddleware;
@@ -31,6 +32,10 @@ Route::middleware(AuthenticationMiddleware::class)->group(function () {
             Route::name("show")->get("{id}", 'show');
             Route::name("update")->put("{id}", 'update');
             Route::name("destroy")->delete("{id}", 'destroy');
+        });
+
+        Route::name("endPoints.")->prefix('end-points')->controller(EndPointController::class)->group(function () {
+            Route::name("index")->get(null, 'index');
         });
         //
     });
