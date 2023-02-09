@@ -19,13 +19,25 @@ class UnitSeeder extends Seeder
     public function run(): void
     {
         Unit::create([
-            "name" => "İnsan Kaynakları",
+            "name" => "İnsan Kaynakları Departmanı",
             "reg_code" => $this->generateRegCode(Unit::class),
         ]);
 
         Unit::create([
-            "name" => "Muhasebe",
+            "name" => "Muhasebe Departmanı",
             "reg_code" => $this->generateRegCode(Unit::class),
+        ]);
+
+        Unit::create([
+            "name" => "Muhasebe Müdürü",
+            "reg_code" => $this->generateRegCode(Unit::class),
+            "parent_id" => 2
+        ]);
+
+        Unit::create([
+            "name" => "Muhasebe Müdür Yardımcısı",
+            "reg_code" => $this->generateRegCode(Unit::class),
+            "parent_id" => 2
         ]);
     }
 }
