@@ -19,7 +19,8 @@ class Unit extends Model
     protected $fillable = [
         'name',
         'reg_code',
-        "parent_id"
+        "parent_id",
+        "type",
     ];
 
     /**
