@@ -34,9 +34,7 @@ Route::middleware(AuthenticationMiddleware::class)->group(function () {
             Route::name("destroy")->delete("{id}", 'destroy');
         });
 
-        Route::name("endPoints.")->prefix('end-points')->controller(EndPointController::class)->group(function () {
-            Route::name("index")->get(null, 'index');
-        });
+        Route::name("endPoints.index")->get("end-points",EndPointController::class);
         //
     });
 });

@@ -16,7 +16,7 @@ class EndPointController extends Controller
     /**
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function __invoke(): JsonResponse
     {
 
         $end_points = collect(Route::getRoutes()->get())->map(function ($item, $key) {
