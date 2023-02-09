@@ -14,11 +14,11 @@ enum UnitTypeEnum : int
     {
         return match ($this) {
             self::DEPARTMENT => [
-                "name" => "Departman",
+                "type" => "Departman",
                 "value" => self::DEPARTMENT->value,
             ],
             self::POSITION => [
-                "name" => "Pozisyon",
+                "type" => "Pozisyon",
                 "value" => self::POSITION->value,
             ]
         };
