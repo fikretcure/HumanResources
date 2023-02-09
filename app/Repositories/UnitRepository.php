@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 
 use App\Models\Unit;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -21,11 +20,17 @@ class UnitRepository extends Repository
     private Builder $model;
 
     /**
+     * @var string
+     */
+    private $model_class;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->model = Unit::query();
+        $this->model_class = Unit::class;
     }
 
     /**
@@ -43,7 +48,7 @@ class UnitRepository extends Repository
     public function store(array $attributes): Builder|Model
     {
         return $this->model->create(
-            attributes: ["reg_code" => $this->generateRegCode(User::class)] + $attributes
+            attributes: ["reg_code" => $this->generateRegCode($this->model_class)] + $attributes
         );
     }
 
