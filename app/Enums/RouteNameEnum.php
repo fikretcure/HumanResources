@@ -12,6 +12,7 @@ enum RouteNameEnum: string
     case auth = "Hesap";
     case endPoints = "İşlem";
     case units = "Birim";
+    case unitEndPoints = "Birim İşlev";
 
     case login = "Girişi";
 
@@ -28,7 +29,7 @@ enum RouteNameEnum: string
      */
     public static function generateInfoMes($name): mixed
     {
-        return str()->of($name)->explode('.')->map(function ($name, $key) {
+        return str()->of(str()->camel($name))->explode('.')->map(function ($name, $key) {
             return (collect(self::cases())->map(function ($item, $key) use ($name) {
                 return $item->name == $name ? $item->value : false;
             })->filter())->first();
