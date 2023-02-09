@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UnitTypeEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,16 @@ class Unit extends Model
     {
         return Attribute::make(
             set: fn($value) => str()->title($value),
+        );
+    }
+
+    /**
+     * @return Attribute
+     */
+    protected function type(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => UnitTypeEnum::from($value)->detail(),
         );
     }
 }
