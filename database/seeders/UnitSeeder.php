@@ -41,7 +41,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "name" => "Muhasebe Müdür Yardımcısı",
             "reg_code" => $this->generateRegCode(Unit::class),
-            "parent_id" => 2,
+            "parent_id" => 3,
             "type" => UnitTypeEnum::POSITION->value
         ]);
 
