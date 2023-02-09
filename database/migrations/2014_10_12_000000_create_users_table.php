@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('password')->nullable();
             $table->string('status');
             $table->integer('role_state');
-            $table->string('reg_code');
+            $table->string('reg_code')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
