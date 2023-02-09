@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-use Illuminate\Support\Facades\Route;
-
 /**
  *
  */
@@ -24,11 +22,12 @@ enum RouteNameEnum: string
 
 
     /**
+     * @param $name
      * @return mixed
      */
-    public static function generateInfoMes(): mixed
+    public static function generateInfoMes($name): mixed
     {
-        return str()->of(Route::currentRouteName())->explode('.')->map(function ($name, $key) {
+        return str()->of($name)->explode('.')->map(function ($name, $key) {
             return (collect(self::cases())->map(function ($item, $key) use ($name) {
                 return $item->name == $name ? $item->value : false;
             })->filter())->first();
