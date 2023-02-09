@@ -2,6 +2,9 @@
 
 namespace App\Enums;
 
+use App\Http\Middleware\AuthenticationMiddleware;
+use Illuminate\Support\Facades\Route;
+
 /**
  *
  */
@@ -34,6 +37,24 @@ enum RouteNameEnum: string
                 return $item->name == $name ? $item->value : false;
             })->filter())->first();
         })->implode(' ');
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getRouteNames(): mixed
+    {
+        return collect(Route::getRoutes()->get())->map(function ($item, $key) {
+            if (collect($item->action)->has("middleware")) {
+                if (collect($item->action["middleware"])->contains(AuthenticationMiddleware::class)) {
+                    return [
+                        "slug" => $item->action["as"],
+                        "name" => RouteNameEnum::generateInfoMes($item->action["as"])
+                    ];
+                }
+            }
+            return null;
+        })->filter()->values();
     }
 
 }
