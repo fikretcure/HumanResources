@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Enums\RouteNameEnum;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Route;
 
 /**
  *
@@ -93,7 +94,7 @@ trait Responsed
         $this->status = $status ? $status : $this->status;
 
         return response()->json([
-            "info" => RouteNameEnum::generateInfoMes() . " " . $this->info_message,
+            "info" => RouteNameEnum::generateInfoMes(Route::currentRouteName()) . " " . $this->info_message,
             "message" => $this->message ?? null,
             "data" => $this->data ?? null,
         ], $this->status)->withHeaders([
