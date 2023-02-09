@@ -32,12 +32,12 @@ class UnitEndPointUpdateRequest extends FormRequest
                 "required",
                 "integer",
                 Rule::exists(Unit::class, "id"),
-                Rule::unique(UnitEndPoints::class, "id")->where("end_point_slug", $this->end_point_slug),
+                Rule::unique(UnitEndPoints::class, "id")->where("end_point_slug", $this->end_point_slug)->ignore($this->unit_end_point),
             ],
             "end_point_slug" => [
                 "required",
                 "string",
-                Rule::unique(UnitEndPoints::class, "end_point_slug")->where("unit_id", $this->unit_id),
+                Rule::unique(UnitEndPoints::class, "end_point_slug")->where("unit_id", $this->unit_id)->ignore($this->unit_end_point),
                 (new RouteNameRule())
             ]
         ];
