@@ -11,6 +11,7 @@ enum RouteNameEnum: string
     case passwordReset = "Şifre Güncelleme";
     case auth = "Hesap";
     case endPoints = "İşlem";
+    case units = "Birim";
 
     case login = "Girişi";
 
