@@ -29,9 +29,10 @@ class UnitUpdateRequest extends FormRequest
         return [
             "name" => [
                 "string",
-                Rule::unique(Unit::class)->ignore($this->id)
+                Rule::unique(Unit::class)->ignore($this->unit)
             ],
             "parent_id" => [
+                "nullable",
                 "integer",
                 Rule::exists(Unit::class, "id")
             ],
