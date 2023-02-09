@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('parent_id')->default(0);
+            $table->integer('parent_id')->nullable()->default(0);
             $table->string('reg_code')->unique();
             $table->softDeletes();
             $table->timestamps();
