@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UnitTypeEnum;
 use App\Models\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -34,6 +35,11 @@ class UnitStoreRequest extends FormRequest
             "parent_id" => [
                 "integer",
                 Rule::exists(Unit::class, "id")
+            ],
+            "type" => [
+                "required",
+                "integer",
+                Rule::enum(UnitTypeEnum::class)
             ]
         ];
     }

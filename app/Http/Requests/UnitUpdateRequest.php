@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UnitTypeEnum;
 use App\Models\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -27,13 +28,16 @@ class UnitUpdateRequest extends FormRequest
     {
         return [
             "name" => [
-                "required",
                 "string",
                 Rule::unique(Unit::class)->ignore($this->id)
             ],
             "parent_id" => [
                 "integer",
                 Rule::exists(Unit::class, "id")
+            ],
+            "type" => [
+                "integer",
+                Rule::enum(UnitTypeEnum::class)
             ]
         ];
     }
