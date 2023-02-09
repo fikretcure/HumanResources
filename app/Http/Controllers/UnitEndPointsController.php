@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UnitStoreRequest;
-use App\Http\Requests\UnitUpdateRequest;
+use App\Http\Requests\UnitEndPointStoreRequest;
+use App\Http\Requests\UnitEndPointUpdateRequest;
 use App\Repositories\UnitEndpointRepository;
 use Illuminate\Http\JsonResponse;
 use Throwable;
@@ -36,10 +36,10 @@ class UnitEndPointsController extends Controller
     }
 
     /**
-     * @param UnitStoreRequest $request
+     * @param UnitEndPointStoreRequest $request
      * @return JsonResponse
      */
-    public function store(UnitStoreRequest $request): JsonResponse
+    public function store(UnitEndPointStoreRequest $request): JsonResponse
     {
         return $this->success($this->baseRepository->store($request->validated()))->send();
     }
@@ -54,12 +54,12 @@ class UnitEndPointsController extends Controller
     }
 
     /**
-     * @param UnitUpdateRequest $request
+     * @param UnitEndPointUpdateRequest $request
      * @param $id
      * @return JsonResponse
      * @throws Throwable
      */
-    public function update(UnitUpdateRequest $request, $id): JsonResponse
+    public function update(UnitEndPointUpdateRequest $request, $id): JsonResponse
     {
         $this->baseRepository->update($request->validated(), $id);
 
