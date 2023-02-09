@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->integer('parent_id')->nullable()->default(0);
+            $table->integer('type');
             $table->string('reg_code')->unique();
             $table->softDeletes();
             $table->timestamps();
