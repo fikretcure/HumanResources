@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UnitTypeEnum;
 use App\Models\Unit;
 use App\Traits\RegCode;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,25 +20,29 @@ class UnitSeeder extends Seeder
     public function run(): void
     {
         Unit::create([
-            "name" => "İnsan Kaynakları Departmanı",
+            "name" => "İnsan Kaynakları",
             "reg_code" => $this->generateRegCode(Unit::class),
+            "type" => UnitTypeEnum::DEPARTMENT->value
         ]);
 
         Unit::create([
-            "name" => "Muhasebe Departmanı",
+            "name" => "Muhasebe",
             "reg_code" => $this->generateRegCode(Unit::class),
+            "type" => UnitTypeEnum::DEPARTMENT->value
         ]);
 
         Unit::create([
             "name" => "Muhasebe Müdürü",
             "reg_code" => $this->generateRegCode(Unit::class),
-            "parent_id" => 2
+            "parent_id" => 2,
+            "type" => UnitTypeEnum::POSITION->value
         ]);
 
         Unit::create([
             "name" => "Muhasebe Müdür Yardımcısı",
             "reg_code" => $this->generateRegCode(Unit::class),
-            "parent_id" => 2
+            "parent_id" => 2,
+            "type" => UnitTypeEnum::POSITION->value
         ]);
     }
 }
