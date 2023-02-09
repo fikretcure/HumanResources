@@ -27,15 +27,8 @@ Route::get('/', function () {
 Route::middleware(AuthenticationMiddleware::class)->group(function () {
     Route::middleware(AuthorizationMiddleware::class)->group(function () {
         //
-        Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
-            Route::name("index")->get(null, 'index');
-            Route::name("store")->post(null, 'store');
-            Route::name("show")->get("{id}", 'show');
-            Route::name("update")->put("{id}", 'update');
-            Route::name("destroy")->delete("{id}", 'destroy');
-        });
-
         Route::apiResources([
+            'users' => UserController::class,
             'units' => UnitController::class,
         ]);
 
