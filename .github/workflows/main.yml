@@ -1,8 +1,6 @@
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -15,6 +13,6 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.peanalysis.com
-          username: karincayuvasi@karincayuvasi.com	
+          username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
