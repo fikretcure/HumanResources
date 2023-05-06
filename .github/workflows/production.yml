@@ -3,7 +3,7 @@ on:
     branches: [ "production" ]
 name: 🚀 Deploy website on push
 jobs:
-  web-deploy:
+  demo:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
@@ -15,4 +15,17 @@ jobs:
           server: ftp.peanalysis.com
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
-          server-dir: [api.demo.karincayuvasi.com/,api.gruparge.karincayuvasi.com/]
+          server-dir: api.demo.karincayuvasi.com/
+  gruparge:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.peanalysis.com
+          username: karincayuvasi@karincayuvasi.com
+          password: ${{ secrets.ftp_password }}
+          server-dir: api.demo.gruparge.com/
