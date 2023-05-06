@@ -17,3 +17,4 @@ jobs:
           server: ftp.peanalysis.com
           username: karincayuvasi@karincayuvasi.com	
           password: ${{ secrets.ftp_password }}
+          server-dir: api.test.karincayuvasi.com/
