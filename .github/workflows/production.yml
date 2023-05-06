@@ -1,9 +1,8 @@
 on:
   push:
     branches: [ "production" ]
-name: 🚀 Deploy website on push
 jobs:
-  web-deploy:
+  job1:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
@@ -15,4 +14,4 @@ jobs:
           server: ftp.peanalysis.com
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
-          server-dir: api.demo.karincayuvasi.com/
+          server-dir: [api.demo.karincayuvasi.com/,api.gruparge.karincayuvasi.com/]
