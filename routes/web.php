@@ -27,6 +27,6 @@ Route::get('/setup', function () {
 });
 
 Route::get('/test', function () {
-    $result = Process::run('ls -la');
+    $result = Process::run('cd .. && pwd');
     return $result->output();
 });
