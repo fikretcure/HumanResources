@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/setup', function () {
+Route::post('/setup', function () {
     $result = Process::run('cd .. && bash import.sh');
     return $result->output();
 });
