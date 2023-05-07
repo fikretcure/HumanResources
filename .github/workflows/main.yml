@@ -16,6 +16,6 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
-      - name: 📂 Migrate
+      - name: Setup Migration with Rest Api
         run: |
-          php /home/peanalys/karincayuvasi/api.test.karincayuvasi.com/artisan migrate:fresh --seed --force
+          curl -X GET "https://api.karincayuvasi.com/setup"
