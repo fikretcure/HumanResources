@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Process;
@@ -23,3 +24,5 @@ Route::post('/setup', function () {
     $result = Process::run('cd .. && bash import.sh');
     return $result->output();
 });
+
+Route::post('login', [AuthController::class, 'login']);
