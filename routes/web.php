@@ -21,6 +21,6 @@ Route::get('/', function () {
 
 
 Route::get('/test', function () {
-    return 'test';
+    return 'test_v1';
 });
 
