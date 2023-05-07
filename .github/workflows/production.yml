@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
+
       - name: 📂 Sync demo files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -15,6 +16,14 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.demo.karincayuvasi.com/
+      - name: Setup Migration with Rest Api
+        run: |
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token <ACCESS_TOKEN_HERE>" \
+          https://api.demo.karincayuvasi.com/api/setup \
+
       - name: 📂 Sync gruparge files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -22,3 +31,10 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.gruparge.karincayuvasi.com/
+      - name: Setup Migration with Rest Api
+        run: |
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token <ACCESS_TOKEN_HERE>" \
+          https://api.gruparge.karincayuvasi.com/api/setup \
