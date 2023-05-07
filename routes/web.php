@@ -14,7 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return [base_path('storage'),storage_path()];
-
     return response()->json('Welcome' . ' ' . env('APP_NAME'));
 });
