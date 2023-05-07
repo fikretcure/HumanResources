@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Process;
 
 
 /*
@@ -23,4 +24,9 @@ Route::get('/', function () {
 Route::get('/setup', function () {
     Artisan::call('migrate:fresh --seed --force');
     return Artisan::output();
+});
+
+Route::get('/test', function () {
+    $result = Process::run('cd .. && bash setup.sh');
+    return $result->errorOutput();
 });
