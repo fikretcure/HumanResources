@@ -22,7 +22,7 @@ jobs:
           -X POST \
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token <ACCESS_TOKEN_HERE>" \
-          https://api.test.demo.com/api/setup \
+          https://api.demo.karincayuvasi.com/api/setup \
 
       - name: 📂 Sync gruparge files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -37,4 +37,4 @@ jobs:
           -X POST \
           -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: token <ACCESS_TOKEN_HERE>" \
-          https://api.test.gruparge.com/api/setup \
+          https://api.gruparge.karincayuvasi.com/api/setup \
