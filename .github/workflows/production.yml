@@ -22,9 +22,7 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.gruparge.karincayuvasi.com/
-      - name: Setup Migration with Rest Api Demo
+      - name: Setup Migration with Rest Api
         run: |
           curl -X GET "https://api.demo.karincayuvasi.com/setup"
-      - name: Setup Migration with Rest Api Grup Arge
-        run: |
           curl -X GET "https://api.gruparge.karincayuvasi.com/setup"
