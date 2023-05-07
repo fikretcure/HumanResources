@@ -20,5 +20,5 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     $result = Process::run('php --version');
-    return $result->errorOutput();
+    return [$result->output(), $result->errorOutput()];
 });
