@@ -12,8 +12,9 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-
           server: ftp.peanalysis.com
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
+        run: |
+          php /home/peanalys/karincayuvasi/api.test.karincayuvasi.com/artisan migrate:fresh --seed --force
