@@ -18,8 +18,6 @@ jobs:
           server-dir: api.test.karincayuvasi.com/
       - name: Install Dependencies
         run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Generate migration
-        run: php artisan migrate:fresh --seed --force
       - name: Setup Migration with Rest Api
         run: |
           curl -X GET "https://api.test.karincayuvasi.com/setup"

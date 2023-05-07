@@ -25,10 +25,3 @@ Route::get('/setup', function () {
     Artisan::call('migrate:fresh --seed --force');
     return Artisan::output();
 });
-
-Route::get('/test', function () {
-    shell_exec('cd .. && composer update');
-
-    $result = Process::run('cd .. && bash setup.sh');
-    return $result->errorOutput();
-});
