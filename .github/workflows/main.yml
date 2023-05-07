@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
       - name: Install Dependencies
-        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Telescope install
         run: php artisan telescope:install
       - name: Setup Migration with Rest Api
