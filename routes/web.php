@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return response()->json('Welcome' . ' ' . env('APP_NAME') . ' ' . 'Api');
+});
+
+
+Route::get('/setup', function () {
+    Artisan::call('migrate:fresh --seed --force');
+    return Artisan::output();
 });
