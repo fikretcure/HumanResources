@@ -16,6 +16,10 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Generate key
+        run: php artisan --version
       - name: Setup Migration with Rest Api
         run: |
           curl -X GET "https://api.test.karincayuvasi.com/setup"
