@@ -19,7 +19,7 @@ jobs:
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Telescope install
-        run: php artisan telescope:install
+        run: php artisan --version
       - name: Setup Migration with Rest Api
         run: |
           curl -X GET "https://api.test.karincayuvasi.com/setup"
