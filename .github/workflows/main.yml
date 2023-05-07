@@ -18,4 +18,4 @@ jobs:
           server-dir: api.test.karincayuvasi.com/
       - name: Setup Migration with Rest Api
         run: |
-          curl -X GET "https://api.karincayuvasi.com/setup"
+          curl -X GET "https://api.test.karincayuvasi.com/setup"
