@@ -19,4 +19,3 @@ jobs:
       - name: Setup Migration with Rest Api
         run: |
           curl -X GET "https://api.test.karincayuvasi.com/setup"
-        script: './setup.sh'
