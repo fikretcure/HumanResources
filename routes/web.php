@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/setup', function () {
     $result = Process::run('cd .. && bash import.sh');
     return $result->output();
