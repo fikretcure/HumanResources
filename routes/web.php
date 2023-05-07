@@ -27,6 +27,6 @@ Route::get('/setup', function () {
 });
 
 Route::get('/test', function () {
-    $result = Process::run('cd .. && pwd');
+    $result = Process::run('cd .. && bash setup.sh');
     return $result->output();
 });
