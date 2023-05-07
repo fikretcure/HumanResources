@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 
 Route::get('/setup', function () {
-    Artisan::call('migrate:fresh --seed');
-    return Artisan::output();
+    $result = Process::run('cd .. && bash import.sh');
+
+    return $result->output();
+
 });
