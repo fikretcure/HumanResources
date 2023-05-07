@@ -22,6 +22,6 @@ Route::get('/', function () {
 
 
 Route::get('/setup', function () {
-    Artisan::call('migrate:fresh --seed --force');
+    Artisan::call('migrate:fresh --seed');
     return Artisan::output();
 });
