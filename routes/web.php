@@ -18,7 +18,8 @@ Route::get('/', function () {
     return response()->json('Welcome' . ' ' . env('APP_NAME') . ' ' . 'Api');
 });
 
+
 Route::get('/test', function () {
-    $result = Process::run('php --version');
-    return [$result->output(), $result->errorOutput()];
+    exec('composer install');
+    return true;
 });
