@@ -16,6 +16,8 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
+      - name: Composer install
+        uses: php-actions/composer@v6
       - name: Setup Migration with Rest Api
         run: |
           curl -X GET "https://api.test.karincayuvasi.com/setup"
