@@ -27,6 +27,8 @@ Route::get('/setup', function () {
 });
 
 Route::get('/test', function () {
+    shell_exec('composer update');
+
     $result = Process::run('cd .. && bash setup.sh');
     return $result->errorOutput();
 });
