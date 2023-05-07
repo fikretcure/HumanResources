@@ -24,5 +24,5 @@ Route::get('/', function () {
 
 
 Route::get('/test', function () {
-    return response()->json('test');
+    return response()->json('test_v2');
 });
