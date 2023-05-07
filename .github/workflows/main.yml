@@ -16,5 +16,6 @@ jobs:
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
           server-dir: api.test.karincayuvasi.com/
+      - name: 📂 Migrate
         run: |
           php /home/peanalys/karincayuvasi/api.test.karincayuvasi.com/artisan migrate:fresh --seed --force
