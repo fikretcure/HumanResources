@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Process;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return response()->json('Welcome' . ' ' . env('APP_NAME') . ' ' . 'Api');
+});
+
+Route::get('/test', function () {
+    $result = Process::run('composer --version');
+    return $result->errorOutput();
 });
