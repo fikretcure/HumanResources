@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Process;
 
 
 /*
@@ -21,10 +20,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/setup', function () {
-    $result = Process::run('cd .. && bash import.sh');
-    return $result->output();
-});
+
 
 
 Route::get('/test', function () {
