@@ -25,21 +25,11 @@ Route::post('/setup', function () {
         $result = Process::run('cd .. && bash setup.sh');
         return $result->output();
 
-    } else {
-        if (request()->bearerToken() == env('APP_KEY')) {
-            $result = Process::run('cd .. && bash setup.sh');
-            return $result->output();
-        }
-        return response()->json(false, 404);
+    } else if (request()->bearerToken() == env('APP_KEY')) {
+        $result = Process::run('cd .. && bash setup.sh');
+        return $result->output();
     }
-});
-
-Route::get('/composer', function () {
-    shell_exec('cd .. && composer --version');
-    exec('cd .. && composer --version');
-
-    $result = Process::run('cd .. && bash composer.sh');
-    return [$result->output(), $result->errorOutput()];
+    return response()->json(false, 404);
 });
 
 Route::post('login', [AuthController::class, 'login']);
