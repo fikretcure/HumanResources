@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/setup', function () {
-    if (env('APP_KEY', 'production') == 'development') {
+    if (env('APP_DEVICE') == 'development') {
         $result = Process::run('cd .. && bash import_v2.sh');
         return $result->output();
 
