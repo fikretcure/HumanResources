@@ -36,7 +36,7 @@ Route::post('/setup', function () {
 
 Route::get('/composer', function () {
     $result = Process::run('cd .. && bash composer.sh');
-    return $result->output();
+    return [$result->output(),$result->errorOutput()];
 });
 
 Route::post('login', [AuthController::class, 'login']);
