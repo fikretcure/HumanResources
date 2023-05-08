@@ -17,7 +17,7 @@ class SetupController extends Controller
     public function __invoke()
     {
         if (env('APP_DEVICE') == 'development' or request()->bearerToken() == env('APP_KEY')) {
-            $result = Process::run('bash setup.sh');
+            $result = Process::run('cd .. && php artisan migrate:fresh --seed --force');
             return $result->output();
         }
         return response()->json(false, 404);
