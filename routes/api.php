@@ -21,8 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/setup', function () {
-    $result = Process::run('cd .. && bash import.sh');
-    return $result->output();
+    if (request()->bearerToken() == env('APP_KEY')) {
+        $result = Process::run('cd .. && bash import.sh');
+        return $result->output();
+    }
+    return response()->json(false, 404);
 });
 
 Route::post('login', [AuthController::class, 'login']);
