@@ -21,10 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/setup', function () {
-    return \request()->bearerToken();
+    return response()->json(request()->bearerToken());
 
-    $result = Process::run('cd .. && bash import.sh');
-    return $result->output();
+
+   // $result = Process::run('cd .. && bash import.sh');
+    //return $result->output();
 });
 
 Route::post('login', [AuthController::class, 'login']);
