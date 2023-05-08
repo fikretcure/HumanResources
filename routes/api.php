@@ -21,6 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/setup', function () {
+
+    return 'ssdsdad';
+
     return response()->json(request()->bearerToken());
 
 
