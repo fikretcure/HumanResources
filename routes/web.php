@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
 
 /*
@@ -17,9 +16,4 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return response()->json('Welcome' . ' ' . env('APP_NAME') . ' ' . 'Api');
-});
-
-
-Route::get('/test', function () {
-    return 'test_v5';
 });
