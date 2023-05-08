@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/setup', function () {
+    return \request()->bearerToken();
+
     $result = Process::run('cd .. && bash import.sh');
     return $result->output();
 });
