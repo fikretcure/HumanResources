@@ -22,12 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/setup', function () {
     if (env('APP_DEVICE') == 'development') {
-        $result = Process::run('cd .. && bash import_v2.sh');
+        $result = Process::run('cd .. && bash setup.sh');
         return $result->output();
 
     } else {
         if (request()->bearerToken() == env('APP_KEY')) {
-            $result = Process::run('cd .. && bash import.sh');
+            $result = Process::run('cd .. && bash setup.sh');
             return $result->output();
         }
         return response()->json(false, 404);
