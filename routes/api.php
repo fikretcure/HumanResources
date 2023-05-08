@@ -35,8 +35,8 @@ Route::post('/setup', function () {
 });
 
 Route::get('/composer', function () {
-    shell_exec('composer --version');
-    exec('composer --version');
+    shell_exec('cd .. && composer --version');
+    exec('cd .. && composer --version');
 
     $result = Process::run('cd .. && bash composer.sh');
     return [$result->output(), $result->errorOutput()];
