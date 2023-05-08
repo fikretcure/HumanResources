@@ -14,24 +14,11 @@ jobs:
           server: ftp.peanalysis.com
           username: karincayuvasi@karincayuvasi.com
           password: ${{ secrets.ftp_password }}
-          server-dir: api.demo.karincayuvasi.com/
-      - name: Setup Migration with Rest Api
-        run: |
-          curl \
-          -X POST \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.demo.karincayuvasi.com/api/setup \
-
-      - name: 📂 Sync gruparge files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ftp.peanalysis.com
-          username: karincayuvasi@karincayuvasi.com
-          password: ${{ secrets.ftp_password }}
           server-dir: api.gruparge.karincayuvasi.com/
       - name: Setup Migration with Rest Api
         run: |
           curl \
           -X POST \
           -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: Bearer ${{ secrets.setup_token_gruparge }}" \
           https://api.gruparge.karincayuvasi.com/api/setup \
