@@ -12,10 +12,16 @@ class AuthController extends Controller
 {
 
 
+    /**
+     * @param LoginAuthRequest $request
+     * @return \Illuminate\Contracts\Auth\Authenticatable|string|null
+     */
     public function login(LoginAuthRequest $request)
     {
-        Auth::loginUsingId(1);
-        $token = $request->user()->createToken('api');
-        return ['token' => $token->plainTextToken];
+        if (Auth::attempt($request->validated())) {
+
+            return Auth::user();
+        }
+        return 'Giris bilgisi hatali';
     }
 }

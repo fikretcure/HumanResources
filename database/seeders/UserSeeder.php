@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'surname' => 'Admin',
             'phone' => '5050687161',
             'email' => 'fikretcure@gmail.com',
-            'password' => 123123,
+            'password' => 'Karinca-123',
             'status' => true,
         ]);
     }
