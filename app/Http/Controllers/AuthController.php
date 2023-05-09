@@ -14,8 +14,8 @@ class AuthController extends Controller
 
     public function login(LoginAuthRequest $request)
     {
-        if (Auth::attempt($request->validated())) {
-            return $request->user()->createToken('api')->plainTextToken;
+        if (Auth::attempt($request->only('email','password'))) {
+            return $request->user()->createToken($request->device)->plainTextToken;
         }
         return response()->json('Giris bilgilerinizi kontrol etmelisiniz !', 403);
     }

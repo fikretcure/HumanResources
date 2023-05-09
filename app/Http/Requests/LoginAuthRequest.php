@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class LoginAuthRequest extends FormRequest
@@ -36,6 +37,10 @@ class LoginAuthRequest extends FormRequest
                     ->letters()
                     ->numbers()
                     ->symbols()
+            ],
+            "device" => [
+                "required",
+                Rule::in(['pc', 'mobil'])
             ]
         ];
     }
