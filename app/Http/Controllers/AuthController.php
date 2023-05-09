@@ -20,4 +20,10 @@ class AuthController extends Controller
         }
         return response()->json('Giris bilgilerinizi kontrol etmelisiniz !', 403);
     }
+
+
+    public function auth()
+    {
+        return \auth()->user();
+    }
 }
