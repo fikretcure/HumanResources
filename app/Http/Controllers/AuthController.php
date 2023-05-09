@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginAuthRequest;
+use App\Jobs\LoginJob;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ class AuthController extends Controller
     public function login(LoginAuthRequest $request): JsonResponse
     {
         if (Auth::attempt($request->only('email', 'password'))) {
+            LoginJob::dispatch();
             return $this->success($request->user()->createToken($request->device)->plainTextToken)->send();
         }
         return $this->fail('Giris bilgilerinizi kontrol etmelisiniz !')->send(403);
