@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginAuthRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -11,21 +12,31 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
-    public function login(LoginAuthRequest $request)
+    /**
+     * @param LoginAuthRequest $request
+     * @return JsonResponse
+     */
+    public function login(LoginAuthRequest $request): JsonResponse
     {
         if (Auth::attempt($request->only('email', 'password'))) {
-            return $request->user()->createToken($request->device)->plainTextToken;
+            return $this->success($request->user()->createToken($request->device)->plainTextToken)->send();
         }
-        return response()->json('Giris bilgilerinizi kontrol etmelisiniz !', 403);
+        return $this->fail('Giris bilgilerinizi kontrol etmelisiniz !')->send(403);
     }
 
-    public function auth()
+    /**
+     * @return JsonResponse
+     */
+    public function auth(): JsonResponse
     {
-        return \auth()->user();
+        return $this->success(\auth()->user())->send();
     }
 
-    public function logout()
+    /**
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
     {
-        return request()->user()->tokens()->delete();
+        return $this->success(request()->user()->tokens()->delete())->send();
     }
 }

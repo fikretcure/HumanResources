@@ -90,6 +90,6 @@ trait ResponseTrait
             "status_note" => $this->status_note ?? null,
             "note" => $this->note ?? null,
             "data" => $this->data ?? null,
-        ], $this->status ?? $status);
+        ], $status ?? $this->status);
     }
 }
