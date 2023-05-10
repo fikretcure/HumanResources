@@ -5,7 +5,6 @@ namespace App\Traits;
 
 use App\Enums\RouteName;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Route;
 
 /**
  *
