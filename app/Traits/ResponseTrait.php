@@ -35,7 +35,7 @@ trait ResponseTrait
 
     public function __construct()
     {
-        $this->status_note = RouteName::generateInfoMes();
+        $this->status_note = RouteName::statusNote();
     }
 
     /**

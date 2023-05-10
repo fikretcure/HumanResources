@@ -3,30 +3,24 @@
 namespace App\Enums;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /**
  *
  */
 enum RouteName: string
 {
-    case auth = "Oturum";
-    case login = "Girisi";
-    case get = "Listeleme";
-    case delete = "Silme";
-    case update = "Güncelleme";
-    case show = "Getirme";
-    case create = "Ekleme";
-
+    case auth_login = 'Kullanici Girisi';
+    case auth_show = 'Oturum Gosterimi';
 
     /**
      * @return mixed
      */
-    public static function generateInfoMes(): mixed
+    public static function statusNote(): mixed
     {
-        return str(Route::currentRouteName())->camel()->explode('.')->map(function ($name, $key) {
-            return (collect(self::cases())->map(function ($item, $key) use ($name) {
-                return $item->name == $name ? $item->value : false;
-            })->filter())->first();
-        })->implode(' ');
+        $name = Str::replace('.', '_', Route::currentRouteName());
+        return (collect(self::cases())->map(function ($item) use ($name) {
+            return $item->name == $name ? $item->value : false;
+        })->filter())->first();
     }
 }
