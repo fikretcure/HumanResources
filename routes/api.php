@@ -24,4 +24,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('setup', SetupController::class);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('auth.login');
