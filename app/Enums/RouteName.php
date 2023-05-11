@@ -13,6 +13,7 @@ enum RouteName: string
     case auth_login = 'Kullanici Girisi';
     case auth_show = 'Oturum Gosterimi';
     case auth_logout = 'Oturum Kapatma';
+    case setup = 'Database Kurulumu';
 
     /**
      * @return mixed

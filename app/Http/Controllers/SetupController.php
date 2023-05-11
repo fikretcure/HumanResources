@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Process;
 
 /**
@@ -12,14 +12,14 @@ class SetupController extends Controller
 {
 
     /**
-     * @return \Illuminate\Http\JsonResponse|string
+     * @return JsonResponse
      */
-    public function __invoke()
+    public function __invoke(): JsonResponse
     {
         if (env('APP_DEVICE') == 'development' or request()->bearerToken() == env('APP_KEY')) {
             $result = Process::run('cd .. && php artisan migrate:fresh --seed --force');
-            return $result->output();
+            return $this->success(($result->output()))->send();
         }
-        return response()->json(false, 404);
+        return $this->fail()->send();
     }
 }
