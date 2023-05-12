@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 
+use App\Enums\RouteName;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 trait ResponseTrait
 {
+
     /**
      * @var mixed
      */
@@ -30,6 +32,12 @@ trait ResponseTrait
      */
     private int $status;
 
+
+    public function __construct()
+    {
+        $this->status_note = RouteName::statusNote();
+    }
+
     /**
      * @param $data
      * @return $this
@@ -38,8 +46,7 @@ trait ResponseTrait
     {
         $this->data = $data;
         $this->status = 200;
-        $this->status_note = "Başarılı";
-
+        $this->status_note .= ' Basarili';
         return $this;
     }
 
@@ -51,8 +58,7 @@ trait ResponseTrait
     {
         $this->data = $data;
         $this->status = 404;
-        $this->status_note = "Başarısız";
-
+        $this->status_note .= ' Basarisiz';
         return $this;
     }
 
@@ -75,8 +81,7 @@ trait ResponseTrait
     {
         $this->note = $note;
         $this->status = 404;
-        $this->status_note = "Başarısız";
-
+        $this->status_note .= ' Basarisiz';
         return $this;
     }
 
