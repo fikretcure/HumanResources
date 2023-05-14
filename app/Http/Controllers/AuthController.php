@@ -20,10 +20,10 @@ class AuthController extends Controller
      */
     public function login(LoginAuthRequest $request): JsonResponse
     {
-            if (Auth::attempt($request->only('email', 'password'))) {
-                return $this->success($request->user()->createToken($request->device)->plainTextToken)->send();
-            }
-            return $this->failMes('Kullanici bilgilerinizi kontrol etmelisiniz')->send();
+        if (Auth::attempt($request->only('email', 'password'))) {
+            return $this->success($request->user()->createToken($request->device)->plainTextToken)->send();
+        }
+        return $this->failMes('Kullanici bilgilerinizi kontrol etmelisiniz')->send();
     }
 
     /**
