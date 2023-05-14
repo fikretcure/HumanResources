@@ -21,5 +21,14 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
         ]);
+
+        User::create([
+            'name' => 'Ataullah',
+            'surname' => 'Turgut',
+            'phone' => '5050687162',
+            'email' => 'career@fikretcure.dev',
+            'password' => 'Karinca-123',
+            'status' => true,
+        ]);
     }
 }
