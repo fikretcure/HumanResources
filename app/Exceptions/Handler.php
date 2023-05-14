@@ -30,13 +30,13 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function (Throwable $exception) {
             if ($exception instanceof ValidationException) {
-                return $this->fail($exception->validator->getMessageBag())->send(402);
+                return $this->failMes($exception->validator->getMessageBag())->send(402);
             }
 
             if ($exception->getPrevious() instanceof RecordsNotFoundException) {
-                return $this->fail($exception->getMessage())->send();
+                return $this->fail($exception->getMessage())->mes('Istenilen kayit bulunamamistir')->send();
             }
-            return $this->fail($exception->getMessage())->send();
+            return $this->fail($exception->getTrace())->mes($exception->getMessage())->send();
         });
 
         $this->reportable(function (Throwable $e) {
