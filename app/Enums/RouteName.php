@@ -27,6 +27,6 @@ enum RouteName: string
                 return $item->name == $name;
             })->value;
         }
-        return Route::currentRouteName();
+        return "End Point Bulunamadi";
     }
 }
