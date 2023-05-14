@@ -32,12 +32,6 @@ trait ResponseTrait
      */
     private int $status;
 
-
-    public function __construct()
-    {
-        $this->status_note = RouteName::statusNote();
-    }
-
     /**
      * @param $data
      * @return $this
@@ -46,7 +40,7 @@ trait ResponseTrait
     {
         $this->data = $data;
         $this->status = 200;
-        $this->status_note .= ' Basarili';
+        $this->status_note .= 'Basarili';
         return $this;
     }
 
@@ -58,7 +52,7 @@ trait ResponseTrait
     {
         $this->data = $data;
         $this->status = 404;
-        $this->status_note .= ' Basarisiz';
+        $this->status_note = 'Basarisiz';
         return $this;
     }
 
@@ -81,7 +75,7 @@ trait ResponseTrait
     {
         $this->note = $note;
         $this->status = 404;
-        $this->status_note .= ' Basarisiz';
+        $this->status_note = 'Basarisiz';
         return $this;
     }
 
@@ -92,7 +86,7 @@ trait ResponseTrait
     public function send(int $status = null): JsonResponse
     {
         return response()->json([
-            "status_note" => $this->status_note ?? null,
+            "status_note" => RouteName::statusNote() . " " . $this->status_note ?? null,
             "note" => $this->note ?? null,
             "data" => $this->data ?? null,
         ], $status ?? $this->status);
