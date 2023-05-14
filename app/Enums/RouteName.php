@@ -21,9 +21,12 @@ enum RouteName: string
      */
     public static function statusNote(): mixed
     {
-        $name = Str::replace('.', '_', Route::currentRouteName());
-        return collect(self::cases())->first(function ($item) use ($name) {
-            return $item->name == $name;
-        })->value;
+        if (Route::currentRouteName()) {
+            $name = Str::replace('.', '_', Route::currentRouteName());
+            return collect(self::cases())->first(function ($item) use ($name) {
+                return $item->name == $name;
+            })->value;
+        }
+        return Route::currentRouteName();
     }
 }
