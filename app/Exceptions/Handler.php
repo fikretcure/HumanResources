@@ -34,9 +34,9 @@ class Handler extends ExceptionHandler
             }
 
             if ($exception->getPrevious() instanceof RecordsNotFoundException) {
-                return response()->json('a2');
+                return $this->fail($exception->getMessage())->send();
             }
-            //return response()->json($exception->getMessage());
+            return $this->fail($exception->getMessage())->send();
         });
 
         $this->reportable(function (Throwable $e) {
