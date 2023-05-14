@@ -40,7 +40,7 @@ trait ResponseTrait
     {
         $this->data = $data;
         $this->status = 200;
-        $this->status_note .= 'Basarili';
+        $this->status_note = 'Basarili';
         return $this;
     }
 
