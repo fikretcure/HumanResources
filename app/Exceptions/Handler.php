@@ -28,7 +28,7 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (Throwable $exception, $request) {
+        $this->renderable(function (Throwable $exception) {
             if ($exception instanceof ValidationException) {
                 return $this->fail($exception->validator->getMessageBag())->send(402);
             }
