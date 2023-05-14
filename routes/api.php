@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BackUpController;
 use App\Http\Controllers\SetupController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +24,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('setup', SetupController::class)->name('setup');
+Route::post('backup', BackUpController::class)->name('backup');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');

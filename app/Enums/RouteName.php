@@ -14,6 +14,7 @@ enum RouteName: string
     case auth_show = 'Oturum Gosterimi';
     case auth_logout = 'Oturum Kapatma';
     case setup = 'Database Kurulumu';
+    case backup = 'Database Yedegi';
 
     /**
      * @return mixed
