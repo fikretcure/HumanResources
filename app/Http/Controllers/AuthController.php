@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
-
     /**
      * @param LoginAuthRequest $request
      * @return JsonResponse
