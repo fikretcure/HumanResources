@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return response()->json('eeguney -Welcome' . ' ' . env('APP_NAME') . ' Company - ' . 'Karınca Yuvası Api');
+    return response()->json('Welcome' . ' ' . env('APP_NAME') . ' Company - ' . 'Karınca Yuvası Api');
 });
