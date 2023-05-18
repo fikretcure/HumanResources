@@ -18,6 +18,7 @@ enum RouteName: string
     case departments_index = 'Departmanlarin Listelenmesi';
     case departments_show = 'Departman Getirme';
     case departments_store = 'Departman Kaydi';
+    case departments_update = 'Departman Guncelleme';
 
     /**
      * @return mixed
