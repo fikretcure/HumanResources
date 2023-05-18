@@ -52,5 +52,9 @@ class Repository
         return $this->model->create($data);
     }
 
+    public function update(int $id, array $data = null)
+    {
+        return $this->model->find($id)->update($data);
+    }
 
 }
