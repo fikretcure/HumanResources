@@ -17,25 +17,23 @@ class DepartmentController extends Controller
     /**
      * @var DepartmentRepository
      */
-    private DepartmentRepository $department;
+    private DepartmentRepository $departmentRepository;
 
     /**
      *
      */
     public function __construct()
     {
-        $this->department = new DepartmentRepository();
+        $this->departmentRepository = new DepartmentRepository();
     }
-
 
     /**
      * @return JsonResponse
      */
     public function index(): JsonResponse
     {
-        return $this->success($this->department->all())->send();
+        return $this->success($this->departmentRepository->all())->send();
     }
-
 
     /**
      * @param StoreDepartmentRequest $request
@@ -45,7 +43,6 @@ class DepartmentController extends Controller
     {
         //
     }
-
 
     /**
      * @param Department $department
