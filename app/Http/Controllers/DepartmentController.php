@@ -35,7 +35,6 @@ class DepartmentController extends Controller
         return $this->success($this->departmentRepository->all())->send();
     }
 
-
     /**
      * @param StoreDepartmentRequest $request
      * @return JsonResponse
@@ -56,19 +55,21 @@ class DepartmentController extends Controller
 
     /**
      * @param UpdateDepartmentRequest $request
-     * @param $department
+     * @param Department $department
      * @return JsonResponse
      */
-    public function update(UpdateDepartmentRequest $request, $department): JsonResponse
+    public function update(UpdateDepartmentRequest $request, Department $department): JsonResponse
     {
-         return $this->success($this->departmentRepository->update($department, $request->validated()))->send();
+        $this->departmentRepository->update($department->id, $request->validated());
+        return $this->success($department->refresh())->send();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param Department $department
+     * @return JsonResponse
      */
-    public function destroy(Department $department)
+    public function destroy(Department $department): JsonResponse
     {
-        //
+        return $this->success($department->delete())->send();
     }
 }
