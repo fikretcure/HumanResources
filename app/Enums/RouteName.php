@@ -19,6 +19,7 @@ enum RouteName: string
     case departments_show = 'Departman Getirme';
     case departments_store = 'Departman Kaydi';
     case departments_update = 'Departman Guncelleme';
+    case departments_destroy = 'Departman Silme';
 
     /**
      * @return mixed
