@@ -27,7 +27,8 @@ class UpdateDepartmentRequest extends FormRequest
         return [
             'name' => [
                 'string',
-                'filled'
+                'filled',
+                Rule::unique(Department::class)->ignore($this->department)
             ]
         ];
     }
