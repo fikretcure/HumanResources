@@ -35,13 +35,10 @@ class DepartmentController extends Controller
         return $this->success($this->departmentRepository->all())->send();
     }
 
-    /**
-     * @param StoreDepartmentRequest $request
-     * @return void
-     */
-    public function store(StoreDepartmentRequest $request)
+
+    public function store(StoreDepartmentRequest $request): JsonResponse
     {
-        //
+        return $this->success($this->departmentRepository->create($request->validated()))->send();
     }
 
     /**
