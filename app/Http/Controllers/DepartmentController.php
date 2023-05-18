@@ -5,15 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
 use App\Models\Department;
+use App\Repositories\DepartmentRepository;
+use Illuminate\Http\JsonResponse;
 
+/**
+ *
+ */
 class DepartmentController extends Controller
 {
+
+    /**
+     * @var DepartmentRepository
+     */
+    private DepartmentRepository $department;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->department = new DepartmentRepository();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return $this->success($this->department->all())->send();
     }
 
     /**
