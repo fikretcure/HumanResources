@@ -36,6 +36,10 @@ class DepartmentController extends Controller
     }
 
 
+    /**
+     * @param StoreDepartmentRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreDepartmentRequest $request): JsonResponse
     {
         return $this->success($this->departmentRepository->create($request->validated()))->send();
@@ -51,11 +55,13 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param UpdateDepartmentRequest $request
+     * @param $department
+     * @return JsonResponse
      */
-    public function update(UpdateDepartmentRequest $request, Department $department)
+    public function update(UpdateDepartmentRequest $request, $department): JsonResponse
     {
-        //
+         return $this->success($this->departmentRepository->update($department, $request->validated()))->send();
     }
 
     /**
