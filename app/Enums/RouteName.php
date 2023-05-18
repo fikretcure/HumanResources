@@ -30,6 +30,6 @@ enum RouteName: string
                 return $item->name == $name;
             })->value;
         }
-        return 'End Point Bulunamadi';
+        return 'End Point Bulunamadı';
     }
 }
