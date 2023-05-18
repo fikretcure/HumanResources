@@ -17,6 +17,7 @@ enum RouteName: string
     case backup = 'Database Yedegi';
     case departments_index = 'Departmanlarin Listelenmesi';
     case departments_show = 'Departman Getirme';
+    case departments_store = 'Departman Kaydi';
 
     /**
      * @return mixed
@@ -29,6 +30,6 @@ enum RouteName: string
                 return $item->name == $name;
             })->value;
         }
-        return "End Point Bulunamadi";
+        return 'End Point Bulunamadi';
     }
 }
