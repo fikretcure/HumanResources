@@ -54,7 +54,7 @@ class Repository
 
     public function update(int $id, array $data = null)
     {
-        return $this->model->find($id)->update($data);
+        return $this->model->whereId($id)->update($data);
     }
 
 }
