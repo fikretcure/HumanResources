@@ -27,28 +27,33 @@ class DepartmentController extends Controller
         $this->department = new DepartmentRepository();
     }
 
+
     /**
-     * Display a listing of the resource.
+     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         return $this->success($this->department->all())->send();
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * @param StoreDepartmentRequest $request
+     * @return void
      */
     public function store(StoreDepartmentRequest $request)
     {
         //
     }
 
+
     /**
-     * Display the specified resource.
+     * @param Department $department
+     * @return JsonResponse
      */
-    public function show(Department $department)
+    public function show(Department $department): JsonResponse
     {
-        //
+        return $this->success($department)->send();
     }
 
     /**
