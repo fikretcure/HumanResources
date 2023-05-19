@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\ResponseTrait;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
@@ -45,6 +46,13 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (UnauthorizedException $e, Request $request) {
             return $this->fail($e->getMessage())->mes('Islem yapmak icin yetkili degilsiniz')->send(403);
+        });
+
+        $this->renderable(function (QueryException $e, Request $request) {
+            return $this->fail([
+                'message' => $e->getMessage(),
+                'trace' => $e->getTrace(),
+            ])->mes('Sql komutunuzu kontrol etmelisiniz')->send();
         });
 
         $this->reportable(function (Throwable $e) {
