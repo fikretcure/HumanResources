@@ -24,8 +24,7 @@ class DepartmentController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:super_admin|hr_admin')->only('update');
-        $this->middleware('role:super_admin')->only('store');
+        $this->middleware('role:super_admin|hr_admin')->only('update', 'store', 'destroy');
         $this->departmentRepository = new DepartmentRepository();
     }
 
