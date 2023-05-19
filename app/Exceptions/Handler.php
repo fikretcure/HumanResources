@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use App\Traits\ResponseTrait;
 use Illuminate\Database\QueryException;
-use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Exceptions\UnauthorizedException;
@@ -53,6 +52,14 @@ class Handler extends ExceptionHandler
                 'message' => $e->getMessage(),
                 'trace' => $e->getTrace(),
             ])->mes('Sql komutunuzu kontrol etmelisiniz')->send();
+        });
+
+        $this->renderable(function (Throwable $e, Request $request) {
+            return $this->fail([
+                'message' => $e->getMessage(),
+                'trace' => $e->getTrace(),
+                'file' => $e->getFile(),
+            ])->mes('Bilinmeyen Hata Firlatmasi')->send();
         });
 
         $this->reportable(function (Throwable $e) {
