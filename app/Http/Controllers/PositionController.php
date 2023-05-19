@@ -61,13 +61,13 @@ class PositionController extends Controller
 
     /**
      * @param UpdatePositionRequest $request
-     * @param Position $department
+     * @param Position $position
      * @return JsonResponse
      */
-    public function update(UpdatePositionRequest $request, Position $department): JsonResponse
+    public function update(UpdatePositionRequest $request, Position $position): JsonResponse
     {
-        $this->positionRepository->update($department->id, $request->validated());
-        return $this->success($department->refresh())->send();
+        $this->positionRepository->update($position->id, $request->validated());
+        return $this->success($position->refresh())->send();
     }
 
     /**
