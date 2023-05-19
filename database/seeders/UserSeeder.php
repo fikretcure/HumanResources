@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'fikretcure@gmail.com',
             'password' => 'Karinca-123',
             'status' => true,
-        ])->syncRoles(['super_admin', 'hr_admin']);
+        ])->syncRoles(['super_admin']);
 
 
         User::create([
