@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Position;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdatePositionRequest extends FormRequest
 {
@@ -23,7 +25,11 @@ class UpdatePositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'string',
+                'filled',
+                Rule::unique(Position::class)->ignore($this->position)
+            ]
         ];
     }
 }
