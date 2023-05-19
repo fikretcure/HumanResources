@@ -20,6 +20,12 @@ enum RouteName: string
     case departments_store = 'Departman Kaydi';
     case departments_update = 'Departman Guncelleme';
     case departments_destroy = 'Departman Silme';
+    //
+    case positions_index = 'Pozisyonlarin Listelenmesi';
+    case positions_show = 'Pozisyon Getirme';
+    case positions_store = 'Pozisyon Kaydi';
+    case positions_update = 'Pozisyon Guncelleme';
+    case positions_destroy = 'Pozisyon Silme';
 
     /**
      * @return mixed
