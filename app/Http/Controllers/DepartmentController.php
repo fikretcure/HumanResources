@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateDepartmentRequest;
 use App\Models\Department;
 use App\Repositories\DepartmentRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 /**
  *
@@ -42,6 +43,7 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request): JsonResponse
     {
+        DB::beginTransaction();
         return $this->success($this->departmentRepository->create($request->validated()))->send();
     }
 

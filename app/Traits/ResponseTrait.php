@@ -5,6 +5,7 @@ namespace App\Traits;
 
 use App\Enums\RouteName;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 /**
  *
@@ -38,6 +39,8 @@ trait ResponseTrait
      */
     public function success($data = null): static
     {
+        DB::commit();
+
         $this->data = $data;
         $this->status = 200;
         $this->status_note = 'Basarili';
@@ -50,6 +53,7 @@ trait ResponseTrait
      */
     public function fail($data = null): static
     {
+        DB::rollBack();
         $this->data = $data;
         $this->status = 404;
         $this->status_note = 'Basarisiz';
