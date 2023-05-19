@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackUpController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SetupController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('positions', PositionController::class);
+    Route::get('histories', HistoryController::class)->name('histories');
 });
 
 Route::post('setup', SetupController::class)->name('setup');
