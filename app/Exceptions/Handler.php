@@ -7,7 +7,9 @@ use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Exceptions\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Illuminate\Http\Request;
 
 class Handler extends ExceptionHandler
 {
@@ -30,25 +32,19 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (Throwable $exception) {
-            $fail = $exception->getMessage();
-            $code = 404;
-            $mes = $exception->getTrace();
+        $this->renderable(function (ValidationException $e, Request $request) {
+            return $this->fail([
+                "errors" => $e->validator->getMessageBag(),
+                "inputs" => $request->all()
+            ])->mes('Form verilerinizi kontrol etmelisiniz')->send(401);
+        });
 
-            if ($exception instanceof ValidationException) {
-                $fail = $exception->validator->getMessageBag();
-                $mes = 'Girmis oldugunuz verilerini kontrol etmelisiniz';
-                $code = 402;
-            }
-            if ($exception instanceof RecordsNotFoundException) {
-                $mes = 'Istenilen kayit bulunamamistir';
-            }
-            if ($exception instanceof UnauthorizedException) {
-                $mes = 'Islem icin yetkisizsiniz';
-                $code = 403;
-            }
+        $this->renderable(function (NotFoundHttpException $e, Request $request) {
+            return $this->fail($e->getMessage())->mes('Islem yapmak istediginiz kayit bulunamadi')->send();
+        });
 
-            return $this->fail($fail)->mes($mes)->send($code);
+        $this->renderable(function (UnauthorizedException $e, Request $request) {
+            return $this->fail($e->getMessage())->mes('Islem yapmak icin yetkili degilsiniz')->send(403);
         });
 
         $this->reportable(function (Throwable $e) {
