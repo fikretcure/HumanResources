@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Department;
 use App\Models\Position;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,11 @@ class UpdatePositionRequest extends FormRequest
                 'string',
                 'filled',
                 Rule::unique(Position::class)->ignore($this->position)
+            ],
+            'department_id' => [
+                'nullable',
+                'integer',
+                Rule::exists(Department::class, 'id')
             ]
         ];
     }
