@@ -34,6 +34,10 @@ class PositionController extends Controller
      */
     public function index(): JsonResponse
     {
+        if (request()->has('detail')) {
+            return $this->success($this->positionRepository->detail())->send();
+        }
+
         return $this->success($this->positionRepository->all())->send();
     }
 
