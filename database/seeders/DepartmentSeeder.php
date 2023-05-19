@@ -16,5 +16,17 @@ class DepartmentSeeder extends Seeder
         Department::create([
             'name' => 'Muhasebe',
         ]);
+
+        Department::create([
+            'name' => 'Pazarlama',
+        ]);
+
+        Department::create([
+            'name' => 'Bilisim',
+        ]);
+
+        Department::create([
+            'name' => 'Insan Kaynaklari',
+        ]);
     }
 }
