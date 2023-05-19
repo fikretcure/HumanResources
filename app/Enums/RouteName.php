@@ -26,6 +26,7 @@ enum RouteName: string
     case positions_store = 'Pozisyon Kaydi';
     case positions_update = 'Pozisyon Guncelleme';
     case positions_destroy = 'Pozisyon Silme';
+    case histories = 'Aktiviteler';
 
     /**
      * @return mixed
