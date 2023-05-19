@@ -33,6 +33,10 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
+        if (request()->has('detail')) {
+            return $this->success($this->departmentRepository->detail())->send();
+        }
+
         return $this->success($this->departmentRepository->all())->send();
     }
 
