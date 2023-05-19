@@ -4,7 +4,9 @@ namespace App\Traits;
 
 
 use App\Enums\RouteName;
+use App\Models\History;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -39,6 +41,12 @@ trait ResponseTrait
      */
     public function success($data = null): static
     {
+        History::create([
+            'data' => json_encode(RouteName::statusNote()),
+            'user_id' => Auth::id(),
+            'status' => 1
+        ]);
+
         DB::commit();
 
         $this->data = $data;
@@ -54,6 +62,13 @@ trait ResponseTrait
     public function fail($data = null): static
     {
         DB::rollBack();
+
+        History::create([
+            'data' => json_encode(RouteName::statusNote()),
+            'user_id' => Auth::check() ? Auth::id() : 0,
+            'status' => 0
+        ]);
+
         $this->data = $data;
         $this->status = 404;
         $this->status_note = 'Basarisiz';
