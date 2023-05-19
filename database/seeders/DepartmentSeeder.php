@@ -14,19 +14,22 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         Department::create([
-            'name' => 'Muhasebe',
+            'name' => 'Muhasebe'
+        ])->positions()->create([
+            'name' => 'Muhasebe Muduru'
+        ]);
+
+
+        Department::create([
+            'name' => 'Pazarlama'
+        ])->positions()->create([
+            'name' => 'Pazarlama Muduru'
         ]);
 
         Department::create([
-            'name' => 'Pazarlama',
-        ]);
-
-        Department::create([
-            'name' => 'Bilisim',
-        ]);
-
-        Department::create([
-            'name' => 'Insan Kaynaklari',
+            'name' => 'Teknik Servis'
+        ])->positions()->create([
+            'name' => 'Teknik Servis Muduru'
         ]);
     }
 }
