@@ -42,7 +42,10 @@ trait ResponseTrait
     public function success($data = null): static
     {
         History::create([
-            'data' => json_encode(RouteName::statusNote()),
+            'data' => json_encode([
+                'route' => RouteName::statusNote(),
+                'request' => request()->all()
+            ]),
             'user_id' => Auth::id(),
             'status' => 1
         ]);
@@ -64,7 +67,10 @@ trait ResponseTrait
         DB::rollBack();
 
         History::create([
-            'data' => json_encode(RouteName::statusNote()),
+            'data' => json_encode([
+                'route' => RouteName::statusNote(),
+                'request' => request()->all()
+            ]),
             'user_id' => Auth::check() ? Auth::id() : 0,
             'status' => 0
         ]);
