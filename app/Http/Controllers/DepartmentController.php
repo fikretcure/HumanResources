@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
+use App\Http\Resources\DepartmentCollection;
 use App\Http\Resources\DepartmentResource;
+use App\Http\Resources\User;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserV2Collection;
 use App\Models\Department;
 use App\Repositories\DepartmentRepository;
 use Illuminate\Http\JsonResponse;
@@ -34,16 +39,8 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        $data = DepartmentResource::collection($this->departmentRepository->all());
-
-        return $this->success($data)->send();
-
-
-        if (request()->has('detail')) {
-            return $this->success($this->departmentRepository->detail())->send();
-        }
-
-        return $this->success($this->departmentRepository->all())->send();
+        $data = Department::paginate(10);
+        return $this->success(DepartmentResource::collection($data)->response()->getData(true))->send();
     }
 
     /**
@@ -62,7 +59,7 @@ class DepartmentController extends Controller
     public function show(Department $department): JsonResponse
     {
         return $this->success(DepartmentResource::make($department))->send();
-     }
+    }
 
     /**
      * @param UpdateDepartmentRequest $request
