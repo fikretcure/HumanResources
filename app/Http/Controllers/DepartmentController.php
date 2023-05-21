@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
-use App\Http\Resources\DepartmentCollection;
 use App\Http\Resources\DepartmentResource;
-use App\Http\Resources\User;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\UserV2Collection;
 use App\Models\Department;
 use App\Repositories\DepartmentRepository;
 use Illuminate\Http\JsonResponse;
@@ -39,8 +34,7 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        $data = Department::paginate(10);
-        return $this->success(DepartmentResource::collection($data)->response()->getData(true))->send();
+        return $this->successSendPagination(DepartmentResource::collection(Department::paginate(1)));
     }
 
     /**
@@ -49,7 +43,7 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request): JsonResponse
     {
-        return $this->success($this->departmentRepository->create($request->validated()))->send();
+        return $this->successSend($this->departmentRepository->create($request->validated()));
     }
 
     /**
@@ -58,7 +52,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department): JsonResponse
     {
-        return $this->success(DepartmentResource::make($department))->send();
+        return $this->successSend(DepartmentResource::make($department));
     }
 
     /**
@@ -69,7 +63,7 @@ class DepartmentController extends Controller
     public function update(UpdateDepartmentRequest $request, Department $department): JsonResponse
     {
         $this->departmentRepository->update($department->id, $request->validated());
-        return $this->success($department->refresh())->send();
+        return $this->successSend($department->refresh());
     }
 
     /**
@@ -78,6 +72,6 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department): JsonResponse
     {
-        return $this->success($department->delete())->send();
+        return $this->successSend($department->delete());
     }
 }
