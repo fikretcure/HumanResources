@@ -121,7 +121,7 @@ trait ResponseTrait
      * @param $data
      * @return JsonResponse
      */
-    public function successSend($data = null)
+    public function successSend($data = null): JsonResponse
     {
         History::create([
             'data' => json_encode([
@@ -143,7 +143,7 @@ trait ResponseTrait
      * @param $data
      * @return JsonResponse
      */
-    public function successSendPagination($data = null)
+    public function successSendPagination($data = null): JsonResponse
     {
         History::create([
             'data' => json_encode([
