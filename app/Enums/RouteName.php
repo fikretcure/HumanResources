@@ -26,7 +26,11 @@ enum RouteName: string
     case positions_store = 'Pozisyon Kaydi';
     case positions_update = 'Pozisyon Guncelleme';
     case positions_destroy = 'Pozisyon Silme';
-    case histories = 'Aktiviteler';
+    case histories_index = 'Aktivitelerin Listelenmesi';
+    case histories_show = 'Aktivite Getirme';
+    case histories_store = 'Aktivite Kaydi';
+    case histories_update = 'Aktivite Guncelleme';
+    case histories_destroy = 'Aktivite Silme';
 
     /**
      * @return mixed
