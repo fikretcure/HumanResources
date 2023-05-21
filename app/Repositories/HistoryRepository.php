@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 class HistoryRepository extends Repository
 {
     /**
-     * @var Model|History
+     * @var History|Model
      */
-    public Model $model;
+    public Model|History $model;
 
     /**
      *
