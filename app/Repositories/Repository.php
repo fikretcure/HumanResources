@@ -57,4 +57,9 @@ class Repository
         return $this->model->whereId($id)->update($data);
     }
 
+    public function paginate($per_page = null)
+    {
+        return $this->model->paginate($per_page);
+    }
+
 }
