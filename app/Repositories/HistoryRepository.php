@@ -35,7 +35,7 @@ class HistoryRepository extends Repository
         return $this->model->create([
             'data' => json_encode([
                 'route' => RouteName::statusNote(),
-                'request' => request()->all(),
+                'request' => request()->except('password'),
                 'url' => request()->url()
             ]),
             'user_id' => Auth::id(),
