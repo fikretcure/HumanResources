@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\HistoryResource;
 use App\Models\History;
+use App\Repositories\HistoryRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -14,11 +14,34 @@ class HistoryController extends Controller
 {
 
     /**
-     * @param Request $request
+     * @var HistoryRepository
+     */
+    private HistoryRepository $historyRepository;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('role:super_admin')->only('update', 'store', 'destroy');
+        $this->historyRepository = new HistoryRepository();
+    }
+
+    /**
      * @return JsonResponse
      */
-    public function __invoke(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        return $this->success(History::where('user_id',Auth::id())->get())->send();
+        return $this->successSendPagination(HistoryResource::collection($this->historyRepository->paginate()));
     }
+
+    /**
+     * @param History $history
+     * @return JsonResponse
+     */
+    public function show(History $history): JsonResponse
+    {
+        return $this->successSend(HistoryResource::make($history));
+    }
+
 }
