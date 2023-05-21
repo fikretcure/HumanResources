@@ -29,7 +29,7 @@ class AuthController extends Controller
      */
     public function auth(): JsonResponse
     {
-        return $this->success(\auth()->user())->send();
+        return $this->successSend(\auth()->user());
     }
 
     /**
