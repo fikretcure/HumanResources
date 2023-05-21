@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('positions', PositionController::class);
-    Route::get('histories', HistoryController::class)->name('histories');
+    Route::apiResource('histories', HistoryController::class);
 });
 
 Route::post('setup', SetupController::class)->name('setup');
