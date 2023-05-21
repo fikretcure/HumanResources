@@ -34,7 +34,7 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->successSendPagination(DepartmentResource::collection(Department::paginate(1)));
+        return $this->successSendPagination(DepartmentResource::collection($this->departmentRepository->paginate()));
     }
 
     /**
