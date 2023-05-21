@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Position;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 class PositionRepository extends Repository
 {
