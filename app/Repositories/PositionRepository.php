@@ -17,11 +17,4 @@ class PositionRepository extends Repository
         parent::__construct($this->model);
     }
 
-    /**
-     * @return Builder[]|Collection
-     */
-    public function detail(): Collection|array
-    {
-        return $this->model->with('department')->get();
-    }
 }
