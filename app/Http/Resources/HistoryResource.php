@@ -16,6 +16,8 @@ class HistoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user_id' => $this->user_id,
+            'data' => json_decode($this->data) ,
             'created_at' => $this->created_at,
         ];
     }
