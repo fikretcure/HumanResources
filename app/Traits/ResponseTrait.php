@@ -116,4 +116,52 @@ trait ResponseTrait
             "data" => $this->data ?? null,
         ], $status ?? $this->status);
     }
+
+    /**
+     * @param $data
+     * @return JsonResponse
+     */
+    public function successSend($data = null)
+    {
+        History::create([
+            'data' => json_encode([
+                'route' => RouteName::statusNote(),
+                'request' => request()->all()
+            ]),
+            'user_id' => Auth::id(),
+            'status' => 1
+        ]);
+
+        DB::commit();
+        return response()->json([
+            "status_note" => RouteName::statusNote() . " Basarili",
+            "data" => $data,
+        ]);
+    }
+
+    /**
+     * @param $data
+     * @return JsonResponse
+     */
+    public function successSendPagination($data = null)
+    {
+        History::create([
+            'data' => json_encode([
+                'route' => RouteName::statusNote(),
+                'request' => request()->all()
+            ]),
+            'user_id' => Auth::id(),
+            'status' => 1
+        ]);
+
+        DB::commit();
+
+        $data = $data->response()->getData(true);
+        return response()->json([
+            "status_note" => RouteName::statusNote() . " Basarili",
+            "data" => $data['data'],
+            "links" => $data['links'],
+            "meta" => $data['meta'],
+        ]);
+    }
 }
