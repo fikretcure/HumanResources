@@ -5,6 +5,7 @@ namespace App\Traits;
 
 use App\Enums\RouteName;
 use App\Models\History;
+use App\Repositories\HistoryRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,14 +42,7 @@ trait ResponseTrait
      */
     public function success($data = null): static
     {
-        History::create([
-            'data' => json_encode([
-                'route' => RouteName::statusNote(),
-                'request' => request()->all()
-            ]),
-            'user_id' => Auth::id(),
-            'status' => 1
-        ]);
+        (new HistoryRepository())->create();
 
         DB::commit();
 
@@ -123,14 +117,8 @@ trait ResponseTrait
      */
     public function successSend($data = null): JsonResponse
     {
-        History::create([
-            'data' => json_encode([
-                'route' => RouteName::statusNote(),
-                'request' => request()->all()
-            ]),
-            'user_id' => Auth::id(),
-            'status' => 1
-        ]);
+        (new HistoryRepository())->create();
+
 
         DB::commit();
         return response()->json([
@@ -145,14 +133,7 @@ trait ResponseTrait
      */
     public function successSendPagination($data = null): JsonResponse
     {
-        History::create([
-            'data' => json_encode([
-                'route' => RouteName::statusNote(),
-                'request' => request()->all()
-            ]),
-            'user_id' => Auth::id(),
-            'status' => 1
-        ]);
+        (new HistoryRepository())->create();
 
         DB::commit();
 
