@@ -21,6 +21,7 @@ class History extends Model
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'data' =>'json'
     ];
 }
