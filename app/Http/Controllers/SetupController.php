@@ -21,7 +21,7 @@ class SetupController extends Controller
     public function __invoke(): \Illuminate\Foundation\Application|Response|JsonResponse|Application|ResponseFactory
     {
         if (env('APP_DEVICE') == 'development' or request()->bearerToken() == env('APP_KEY')) {
-            $result = Process::run('cd .. && composer install --ignore-platform-reqs --no-scripts');
+            $result = Process::run('cd .. && php artisan migrate:fresh --seed --force');
             return response($result->output());
         }
         return $this->fail()->send();
