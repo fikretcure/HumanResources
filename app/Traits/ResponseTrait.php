@@ -75,28 +75,6 @@ trait ResponseTrait
         return $this;
     }
 
-    /**
-     * @param string|null $note
-     * @return $this
-     */
-    public function mes(string $note = null): static
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    /**
-     * @param $note
-     * @return $this
-     */
-    public function failMes($note = null): static
-    {
-        $this->note = $note;
-        $this->status = 404;
-        $this->status_note = 'Basarisiz';
-        return $this;
-    }
 
     /**
      * @param int|null $status
@@ -115,26 +93,9 @@ trait ResponseTrait
      * @param $data
      * @return JsonResponse
      */
-    public function successSend($data = null): JsonResponse
-    {
-        (new HistoryRepository())->create();
-
-
-        DB::commit();
-        return response()->json([
-            "status_note" => RouteName::statusNote() . " Basarili",
-            "data" => $data,
-        ]);
-    }
-
-    /**
-     * @param $data
-     * @return JsonResponse
-     */
     public function okPaginate($data = null): JsonResponse
     {
         (new HistoryRepository())->create();
-
         DB::commit();
 
         $data = $data->response()->getData(true);
@@ -153,15 +114,34 @@ trait ResponseTrait
     public function ok($data = null): JsonResponse
     {
         (new HistoryRepository())->create();
-
-
         DB::commit();
         return response()->json([
-            "status_note" => RouteName::statusNote() . " Basarili",
+            "information" => [RouteName::statusNote() . " " . "Basarili"],
             "data" => $data,
         ]);
     }
 
+    /**
+     * @param string|null $note
+     * @return JsonResponse
+     */
+    public function error(string $note = null): JsonResponse
+    {
+        DB::rollBack();
+        (new HistoryRepository())->create(0);
+        return response()->json([
+            "information" => [RouteName::statusNote() . " " . "Basarisiz", $note],
+        ], 400);
+    }
 
+    public function exp(string $note = null, $fail = null): JsonResponse
+    {
+        DB::rollBack();
+        (new HistoryRepository())->create(0);
+        return response()->json([
+            "information" => [RouteName::statusNote() . " " . "Basarisiz", $note],
+            "fail" => $fail
+        ], 400);
+    }
 
 }
