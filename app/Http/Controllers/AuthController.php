@@ -19,9 +19,9 @@ class AuthController extends Controller
     public function login(LoginAuthRequest $request): JsonResponse
     {
         if (Auth::attempt($request->only('email', 'password'))) {
-            return $this->success(auth()->user()->getRoleNames())->mes($request->user()->createToken($request->device)->plainTextToken)->send();
+            return $this->ok($request->user()->createToken($request->device)->plainTextToken);
         }
-        return $this->failMes('Kullanici bilgilerinizi kontrol etmelisiniz')->send();
+        return $this->error('Kullanici bilgilerinizi kontrol etmelisiniz');
     }
 
     /**
@@ -29,7 +29,7 @@ class AuthController extends Controller
      */
     public function auth(): JsonResponse
     {
-        return $this->successSend(\auth()->user());
+        return $this->ok(\auth()->user());
     }
 
     /**
@@ -37,6 +37,6 @@ class AuthController extends Controller
      */
     public function logout(): JsonResponse
     {
-        return $this->success(request()->user()->tokens()->delete())->send();
+        return $this->ok(request()->user()->tokens()->delete());
     }
 }
