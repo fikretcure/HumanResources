@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
+use App\Http\Resources\PositionResource;
 use App\Models\Position;
 use App\Repositories\PositionRepository;
 use Illuminate\Http\JsonResponse;
@@ -35,10 +36,10 @@ class PositionController extends Controller
     public function index(): JsonResponse
     {
         if (request()->has('detail')) {
-            return $this->success($this->positionRepository->detail())->send();
+            return $this->okPaginate(PositionResource::collection($this->positionRepository->paginate()));
         }
 
-        return $this->success($this->positionRepository->all())->send();
+        return $this->ok($this->positionRepository->all());
     }
 
     /**
@@ -47,7 +48,7 @@ class PositionController extends Controller
      */
     public function store(StorePositionRequest $request): JsonResponse
     {
-        return $this->success($this->positionRepository->create($request->validated()))->send();
+        return $this->ok($this->positionRepository->create($request->validated()));
     }
 
     /**
@@ -56,7 +57,7 @@ class PositionController extends Controller
      */
     public function show(Position $position): JsonResponse
     {
-        return $this->success($position)->send();
+        return $this->ok($position);
     }
 
     /**
@@ -67,7 +68,7 @@ class PositionController extends Controller
     public function update(UpdatePositionRequest $request, Position $position): JsonResponse
     {
         $this->positionRepository->update($position->id, $request->validated());
-        return $this->success($position->refresh())->send();
+        return $this->ok($position->refresh());
     }
 
     /**
@@ -76,6 +77,6 @@ class PositionController extends Controller
      */
     public function destroy(Position $position): JsonResponse
     {
-        return $this->success($position->delete())->send();
+        return $this->ok($position->delete());
     }
 }
