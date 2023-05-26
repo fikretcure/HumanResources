@@ -131,7 +131,7 @@ trait ResponseTrait
      * @param $data
      * @return JsonResponse
      */
-    public function successSendPagination($data = null): JsonResponse
+    public function okPaginate($data = null): JsonResponse
     {
         (new HistoryRepository())->create();
 
@@ -145,4 +145,23 @@ trait ResponseTrait
             "meta" => $data['meta'],
         ]);
     }
+
+    /**
+     * @param $data
+     * @return JsonResponse
+     */
+    public function ok($data = null): JsonResponse
+    {
+        (new HistoryRepository())->create();
+
+
+        DB::commit();
+        return response()->json([
+            "status_note" => RouteName::statusNote() . " Basarili",
+            "data" => $data,
+        ]);
+    }
+
+
+
 }
