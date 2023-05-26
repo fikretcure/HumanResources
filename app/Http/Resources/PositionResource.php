@@ -8,9 +8,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class PositionResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
-     * @return array<string, mixed>
+     * @return array<int|string, mixed>
      */
     public function toArray(Request $request): array
     {
