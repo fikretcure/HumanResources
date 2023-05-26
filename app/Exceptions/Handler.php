@@ -33,33 +33,33 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (ValidationException $e, Request $request) {
-            return $this->fail([
+            return $this->exp('Form verilerinizi kontrol etmelisiniz', [
                 "errors" => $e->validator->getMessageBag(),
-                "inputs" => $request->all()
-            ])->mes('Form verilerinizi kontrol etmelisiniz')->send(401);
+                "inputs" => $request->except('password')
+            ]);
         });
 
         $this->renderable(function (NotFoundHttpException $e, Request $request) {
-            return $this->fail($e->getMessage())->mes('Islem yapmak istediginiz kayit bulunamadi')->send();
+            return $this->exp('Islem yapmak istediginiz kayit bulunamadi', $e->getMessage());
         });
 
         $this->renderable(function (UnauthorizedException $e, Request $request) {
-            return $this->fail($e->getMessage())->mes('Islem yapmak icin yetkili degilsiniz')->send(403);
+            return $this->exp('Islem yapmak icin yetkili degilsiniz', $e->getMessage());
         });
 
         $this->renderable(function (QueryException $e, Request $request) {
-            return $this->fail([
+            return $this->exp('Sql komutunuzu kontrol etmelisiniz', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTrace(),
-            ])->mes('Sql komutunuzu kontrol etmelisiniz')->send();
+            ]);
         });
 
         $this->renderable(function (Throwable $e, Request $request) {
-            return $this->fail([
+            return $this->exp('Bilinmeyen Hata Firlatmasi', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTrace(),
                 'file' => $e->getFile(),
-            ])->mes('Bilinmeyen Hata Firlatmasi')->send();
+            ]);
         });
 
         $this->reportable(function (Throwable $e) {
