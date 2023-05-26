@@ -70,16 +70,7 @@ trait ResponseTrait
      * @param string|null $note
      * @return JsonResponse
      */
-    public function error(string $note = null): JsonResponse
-    {
-        DB::rollBack();
-        (new HistoryRepository())->create(0);
-        return response()->json([
-            "information" => [RouteName::statusNote() . " " . "Basarisiz", $note],
-        ], 400);
-    }
-
-    public function exp(string $note = null, $fail = null): JsonResponse
+    public function error(string $note = null, $fail = null): JsonResponse
     {
         DB::rollBack();
         (new HistoryRepository())->create(0);
@@ -88,5 +79,4 @@ trait ResponseTrait
             "fail" => $fail
         ], 400);
     }
-
 }
