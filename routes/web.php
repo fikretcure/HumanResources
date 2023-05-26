@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    DB::commit();
     return response()->json('Welcome' . ' ' . env('APP_NAME') . ' Company - ' . 'Karınca Yuvası Api');
 });
