@@ -38,7 +38,7 @@ class HistoryRepository extends Repository
                 'request' => request()->except('password'),
                 'url' => request()->url()
             ]),
-            'user_id' => Auth::id(),
+            'user_id' => Auth::check() ? Auth::id() : 0,
             'status' => $status
         ]);
     }
