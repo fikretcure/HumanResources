@@ -34,7 +34,7 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->successSendPagination(DepartmentResource::collection($this->departmentRepository->paginate()));
+        return $this->okPaginate(DepartmentResource::collection($this->departmentRepository->paginate()));
     }
 
     /**
@@ -43,7 +43,7 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request): JsonResponse
     {
-        return $this->successSend($this->departmentRepository->create($request->validated()));
+        return $this->ok($this->departmentRepository->create($request->validated()));
     }
 
     /**
@@ -52,7 +52,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department): JsonResponse
     {
-        return $this->successSend(DepartmentResource::make($department));
+        return $this->ok(DepartmentResource::make($department));
     }
 
     /**
@@ -63,7 +63,7 @@ class DepartmentController extends Controller
     public function update(UpdateDepartmentRequest $request, Department $department): JsonResponse
     {
         $this->departmentRepository->update($department->id, $request->validated());
-        return $this->successSend($department->refresh());
+        return $this->ok($department->refresh());
     }
 
     /**
@@ -72,6 +72,6 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department): JsonResponse
     {
-        return $this->successSend($department->delete());
+        return $this->ok($department->delete());
     }
 }
