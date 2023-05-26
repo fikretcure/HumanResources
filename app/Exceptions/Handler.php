@@ -33,29 +33,29 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (ValidationException $e, Request $request) {
-            return $this->exp('Form verilerinizi kontrol etmelisiniz', [
+            return $this->error('Form verilerinizi kontrol etmelisiniz', [
                 "errors" => $e->validator->getMessageBag(),
                 "inputs" => $request->except('password')
             ]);
         });
 
         $this->renderable(function (NotFoundHttpException $e, Request $request) {
-            return $this->exp('Islem yapmak istediginiz kayit bulunamadi', $e->getMessage());
+            return $this->error('Islem yapmak istediginiz kayit bulunamadi', $e->getMessage());
         });
 
         $this->renderable(function (UnauthorizedException $e, Request $request) {
-            return $this->exp('Islem yapmak icin yetkili degilsiniz', $e->getMessage());
+            return $this->error('Islem yapmak icin yetkili degilsiniz', $e->getMessage());
         });
 
         $this->renderable(function (QueryException $e, Request $request) {
-            return $this->exp('Sql komutunuzu kontrol etmelisiniz', [
+            return $this->error('Sql komutunuzu kontrol etmelisiniz', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTrace(),
             ]);
         });
 
         $this->renderable(function (Throwable $e, Request $request) {
-            return $this->exp('Bilinmeyen Hata Firlatmasi', [
+            return $this->error('Bilinmeyen Hata Firlatmasi', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTrace(),
                 'file' => $e->getFile(),
