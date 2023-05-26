@@ -100,7 +100,7 @@ trait ResponseTrait
 
         $data = $data->response()->getData(true);
         return response()->json([
-            "status_note" => RouteName::statusNote() . " Basarili",
+            "information" => [RouteName::statusNote() . " " . "Basarili"],
             "data" => $data['data'],
             "links" => $data['links'],
             "meta" => $data['meta'],
