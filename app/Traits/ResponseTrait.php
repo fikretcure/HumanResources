@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-
 use App\Enums\RouteName;
 use App\Repositories\HistoryRepository;
 use Illuminate\Http\JsonResponse;
@@ -13,26 +12,6 @@ use Illuminate\Support\Facades\DB;
  */
 trait ResponseTrait
 {
-
-    /**
-     * @var mixed
-     */
-    private mixed $data;
-
-    /**
-     * @var mixed
-     */
-    private mixed $note;
-
-    /**
-     * @var mixed
-     */
-    private mixed $status_note;
-
-    /**
-     * @var int
-     */
-    private int $status;
 
     /**
      * @param $data
@@ -68,6 +47,7 @@ trait ResponseTrait
 
     /**
      * @param string|null $note
+     * @param $fail
      * @return JsonResponse
      */
     public function error(string $note = null, $fail = null): JsonResponse
