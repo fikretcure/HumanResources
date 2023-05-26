@@ -4,10 +4,8 @@ namespace App\Traits;
 
 
 use App\Enums\RouteName;
-use App\Models\History;
 use App\Repositories\HistoryRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
