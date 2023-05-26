@@ -38,59 +38,6 @@ trait ResponseTrait
 
     /**
      * @param $data
-     * @return $this
-     */
-    public function success($data = null): static
-    {
-        (new HistoryRepository())->create();
-
-        DB::commit();
-
-        $this->data = $data;
-        $this->status = 200;
-        $this->status_note = 'Basarili';
-        return $this;
-    }
-
-    /**
-     * @param $data
-     * @return $this
-     */
-    public function fail($data = null): static
-    {
-        DB::rollBack();
-
-        History::create([
-            'data' => json_encode([
-                'route' => RouteName::statusNote(),
-                'request' => request()->all()
-            ]),
-            'user_id' => Auth::check() ? Auth::id() : 0,
-            'status' => 0
-        ]);
-
-        $this->data = $data;
-        $this->status = 404;
-        $this->status_note = 'Basarisiz';
-        return $this;
-    }
-
-
-    /**
-     * @param int|null $status
-     * @return JsonResponse
-     */
-    public function send(int $status = null): JsonResponse
-    {
-        return response()->json([
-            "status_note" => RouteName::statusNote() . " " . $this->status_note ?? null,
-            "note" => $this->note ?? null,
-            "data" => $this->data ?? null,
-        ], $status ?? $this->status);
-    }
-
-    /**
-     * @param $data
      * @return JsonResponse
      */
     public function okPaginate($data = null): JsonResponse

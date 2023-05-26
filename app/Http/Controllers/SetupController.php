@@ -24,6 +24,6 @@ class SetupController extends Controller
             $result = Process::run('cd .. && php artisan migrate:fresh --seed --force');
             return response($result->output());
         }
-        return $this->fail()->send();
+        return $this->error();
     }
 }

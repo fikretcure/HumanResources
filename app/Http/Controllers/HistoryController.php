@@ -32,7 +32,7 @@ class HistoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->successSendPagination(HistoryResource::collection($this->historyRepository->paginate()));
+        return $this->okPaginate(HistoryResource::collection($this->historyRepository->paginate()));
     }
 
     /**
@@ -41,7 +41,7 @@ class HistoryController extends Controller
      */
     public function show(History $history): JsonResponse
     {
-        return $this->successSend(HistoryResource::make($history));
+        return $this->ok(HistoryResource::make($history));
     }
 
 }
