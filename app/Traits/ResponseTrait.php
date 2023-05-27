@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use App\Enums\RouteName;
-use App\Repositories\HistoryRepository;
+use App\Jobs\CreateHistoryJob;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -19,9 +19,6 @@ trait ResponseTrait
      */
     public function okPaginate($data = null): JsonResponse
     {
-        (new HistoryRepository())->create();
-        DB::commit();
-
         $data = $data->response()->getData(true);
         return response()->json([
             "information" => [RouteName::statusNote() . " " . "Basarili"],
@@ -37,8 +34,7 @@ trait ResponseTrait
      */
     public function ok($data = null): JsonResponse
     {
-        (new HistoryRepository())->create();
-        DB::commit();
+        CreateHistoryJob::dispatch();
         return response()->json([
             "information" => [RouteName::statusNote() . " " . "Basarili"],
             "data" => $data,
@@ -47,16 +43,16 @@ trait ResponseTrait
 
     /**
      * @param string|null $note
-     * @param $fail
+     * @param null $fail
+     * @param int|null $status_code
      * @return JsonResponse
      */
-    public function error(string $note = null, $fail = null): JsonResponse
+    public function error(string $note = null, $fail = null, int $status_code = null): JsonResponse
     {
         DB::rollBack();
-        (new HistoryRepository())->create(0);
         return response()->json([
             "information" => [RouteName::statusNote() . " " . "Basarisiz", $note],
             "fail" => $fail
-        ], 400);
+        ], $status_code ?? 400);
     }
 }
