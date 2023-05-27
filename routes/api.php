@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SetupController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(AuthMiddleware::class)->group(function () {
     Route::name("auth.")->controller(AuthController::class)->group(function () {
         Route::get('auth', 'auth')->name('show');
         Route::post('logout', 'logout')->name('logout');
