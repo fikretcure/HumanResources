@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
       $schedule->command('backup:run')->monthly();
-      $schedule->command('queue:listen')->hourly();
+      $schedule->command('queue:listen')->everyMinute();
     }
 
     /**
