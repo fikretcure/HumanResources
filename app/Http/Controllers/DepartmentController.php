@@ -34,7 +34,11 @@ class DepartmentController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->okPaginate(DepartmentResource::collection($this->departmentRepository->paginate()));
+        if (request()->has('per_page')) {
+            return $this->okPaginate(DepartmentResource::collection($this->departmentRepository->paginate()));
+        }
+
+        return $this->ok(DepartmentResource::collection($this->departmentRepository->all()));
     }
 
     /**
