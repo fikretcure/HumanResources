@@ -34,3 +34,8 @@ Route::middleware(AuthMiddleware::class)->group(function () {
 Route::post('setup', SetupController::class)->name('setup');
 Route::post('backup', BackUpController::class)->name('backup');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+
+
+Route::get('server',function (){
+   return (new \App\Helpers\ServerInfoHelper())->toArray();
+});
