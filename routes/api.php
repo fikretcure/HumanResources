@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\ServerInfoHelper;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackUpController;
 use App\Http\Controllers\DepartmentController;
@@ -37,5 +38,5 @@ Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 
 
 Route::get('server',function (){
-   return (new \App\Helpers\ServerInfoHelper())->toArray();
+   return (new ServerInfoHelper())->toArray();
 });
