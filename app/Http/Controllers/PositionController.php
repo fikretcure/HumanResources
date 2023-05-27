@@ -35,11 +35,10 @@ class PositionController extends Controller
      */
     public function index(): JsonResponse
     {
-        if (request()->has('detail')) {
+        if (request()->has('per_page')) {
             return $this->okPaginate(PositionResource::collection($this->positionRepository->paginate()));
         }
-
-        return $this->ok($this->positionRepository->all());
+        return $this->ok(PositionResource::collection($this->positionRepository->all()));
     }
 
     /**
