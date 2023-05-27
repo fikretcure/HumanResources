@@ -57,7 +57,7 @@ class PositionController extends Controller
      */
     public function show(Position $position): JsonResponse
     {
-        return $this->ok($position);
+        return $this->ok(PositionResource::make($position));
     }
 
     /**
