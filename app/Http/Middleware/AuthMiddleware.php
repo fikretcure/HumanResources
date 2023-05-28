@@ -24,11 +24,9 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $token = Token::where('token', $request->bearerToken())->first();
-
         if ($token) {
             $server = (new ServerInfoHelper())->toArray();
-
-            if ($token->remote_addr == $server['remote_addr'] and $token->server_addr == $server['server_addr']) {
+            if ($token->http_user_agent == $server['http_user_agent'] and $token->remote_addr == $server['remote_addr'] and $token->server_addr == $server['server_addr']) {
                 Auth::loginUsingId($token->user_id);
                 return $next($request);
             } else {
