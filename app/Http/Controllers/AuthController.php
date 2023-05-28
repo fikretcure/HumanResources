@@ -23,12 +23,14 @@ class AuthController extends Controller
     public function login(LoginAuthRequest $request): JsonResponse
     {
         if (Auth::attempt($request->only('email', 'password'))) {
+            $server = (new ServerInfoHelper())->toArray();
+
             $token = Token::create([
                     'user_id' => Auth::id(),
                     'type' => $request->device,
                     'token' => env('APP_NAME') . now() . (string)str()->uuid()
-                ] + (new ServerInfoHelper())->toArray());
-            Mail::to($request->email)->queue(new AuthLoginShipped());
+                ] + $server);
+            Mail::to($request->email)->queue(new AuthLoginShipped($server + ['date' => now()]));
             return $this->ok($token->token);
         }
         return $this->error('Kullanici bilgilerinizi kontrol etmelisiniz');
