@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Helpers\ServerInfoHelper;
 use App\Http\Requests\LoginAuthRequest;
 use App\Mail\AuthLoginShipped;
+use App\Mail\PasswordErrorShipped;
 use App\Models\Token;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -22,8 +24,9 @@ class AuthController extends Controller
      */
     public function login(LoginAuthRequest $request): JsonResponse
     {
+        $server = (new ServerInfoHelper())->toArray();
+
         if (Auth::attempt($request->only('email', 'password'))) {
-            $server = (new ServerInfoHelper())->toArray();
 
             $token = Token::create([
                     'user_id' => Auth::id(),
@@ -33,6 +36,13 @@ class AuthController extends Controller
             Mail::to($request->email)->queue(new AuthLoginShipped($server + ['date' => now()]));
             return $this->ok($token->token);
         }
+
+
+        if (User::whereEmail($request->email)->exists()) {
+            Mail::to($request->email)->queue(new PasswordErrorShipped($server + ['date' => now()] + request()->all()));
+        }
+
+
         return $this->error('Kullanici bilgilerinizi kontrol etmelisiniz');
     }
 
