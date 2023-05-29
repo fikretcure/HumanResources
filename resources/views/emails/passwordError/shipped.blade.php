@@ -1,10 +1,8 @@
 <x-mail::message>
-    # Hesabiniza basarisiz giris denemesi yapilmistir.Sifre bilgilerinizi kontrol etmelisiniz
+    # Hesabiniza basarisiz giris denemesi yapilmistir.Sifre bilgilerinizi kontrol etmelisiniz.Girilen sifre ektedir.
 
     # Datetime {{$data['date']}}
-
     # Email {{$data['email']}}
-    # Password {{$data['password']}}
 
     # Remote Addr {{$data['remote_addr']}}
     # Server Addr {{$data['server_addr']}}
