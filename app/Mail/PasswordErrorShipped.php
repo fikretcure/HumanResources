@@ -36,7 +36,7 @@ class PasswordErrorShipped extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Basarizi giris denemesi" . ' ' . $this->data['date']
+            subject: "Basarisiz giris denemesi" . ' ' . $this->data['date']
         );
     }
 
