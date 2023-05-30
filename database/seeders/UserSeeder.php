@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'name' => 'Ataullah',
             'surname' => 'Turgut',
             'phone' => '5050687162',
-            'email' => 'career@fikretcure.dev',
+            'email' => 'fikretcure@yandex.com.tr',
             'password' => 'Karinca-123',
             'status' => true,
         ])->syncRoles(['hr_admin']);
