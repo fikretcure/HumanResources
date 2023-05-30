@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Super',
             'surname' => 'Admin',
             'phone' => '5050687161',
-            'email' => 'fikretcure@gmail.com',
+            'email' => 'info@fikretcure.dev',
             'password' => 'Karinca-123',
             'status' => true,
         ])->syncRoles(['super_admin']);
