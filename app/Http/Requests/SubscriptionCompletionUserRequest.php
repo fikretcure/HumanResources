@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class SubscriptionCompletionUserRequest extends FormRequest
 {
@@ -30,7 +31,17 @@ class SubscriptionCompletionUserRequest extends FormRequest
                 'string',
                 'required',
                 Rule::exists(MembershipInvitations::class)
-            ]
+            ],
+            "password" => [
+                'required',
+                "string",
+                'confirmed',
+                Password::min(6)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+            ],
         ];
     }
 }
