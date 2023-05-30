@@ -10,4 +10,13 @@ class MembershipInvitations extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'expired_at' => 'datetime',
+    ];
 }
