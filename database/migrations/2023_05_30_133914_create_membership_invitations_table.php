@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('email');
+            $table->string('phone');
             $table->string('token');
             $table->dateTime('expired_at');
             $table->timestamps();
