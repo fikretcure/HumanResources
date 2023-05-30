@@ -32,6 +32,7 @@ enum RouteName: string
     case histories_update = 'Aktivite Guncelleme';
     case histories_destroy = 'Aktivite Silme';
     case users_membershipInvitations = 'Kullanici davet gonderimi';
+    case users_subscriptionCompletion = 'Kullanici sifre tanimlamasi';
 
     /**
      * @return mixed
