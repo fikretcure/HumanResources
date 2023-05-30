@@ -7,6 +7,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\SetupController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ Route::middleware(AuthMiddleware::class)->group(function () {
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('positions', PositionController::class);
     Route::apiResource('histories', HistoryController::class);
+
+    Route::apiResource('users', UserController::class);
+    Route::post('users/membership-invitations', [UserController::class, 'membershipInvitations'])->name('users.membershipInvitations');
 });
 
 Route::post('setup', SetupController::class)->name('setup');
@@ -37,6 +41,6 @@ Route::post('backup', BackUpController::class)->name('backup');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 
 
-Route::get('server',function (){
-   return (new ServerInfoHelper())->toArray();
+Route::get('server', function () {
+    return (new ServerInfoHelper())->toArray();
 });
