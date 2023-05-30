@@ -25,7 +25,7 @@ class PasswordErrorShipped extends Mailable
     public function __construct(array $data)
     {
         $this->data = $data;
-        $path = 'error_password/hatali-sifre-' . now() . '-' . rand() . '.txt';
+        $path = 'error_password/hatali-sifre-' . now() . '.txt';
         Storage::put($path, $this->data['password']);
         $this->url = 'app/' . $path;
     }
