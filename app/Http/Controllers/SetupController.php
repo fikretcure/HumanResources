@@ -22,7 +22,6 @@ class SetupController extends Controller
     public function __invoke(): \Illuminate\Foundation\Application|Response|JsonResponse|Application|ResponseFactory
     {
         if (env('APP_DEVICE') == 'development' or request()->bearerToken() == env('APP_KEY')) {
-            Process::run('cd .. && php artisan queue:listen');
             $result = Process::run('cd .. && php artisan migrate:fresh --seed --force');
             DB::commit();
             return response($result->output());
