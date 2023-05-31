@@ -31,7 +31,6 @@ Route::middleware(AuthMiddleware::class)->group(function () {
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('positions', PositionController::class);
     Route::apiResource('histories', HistoryController::class);
-
     Route::apiResource('users', UserController::class);
 
     Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
