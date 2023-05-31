@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MembershipInvitationsUserRequest;
 use App\Http\Requests\SubscriptionCompletionUserRequest;
-use App\Mail\AuthLoginShipped;
 use App\Mail\MembershipInvitationsShipped;
 use App\Models\MembershipInvitations;
 use App\Models\User;
@@ -54,8 +53,14 @@ class UserController extends Controller
     public function subscriptionCompletion(SubscriptionCompletionUserRequest $request): JsonResponse
     {
         $token = MembershipInvitations::whereToken($request->token)->first();
-        User::create($token->toArray() + $request->only('password') + ['status' => true]);
-        $token->delete();
-        return $this->ok($token->expired_at);
+        if ($token->expired_at->lessThan(now())) {
+            $token->delete();
+            return $this->error();
+
+        } else {
+            User::create($token->toArray() + $request->only('password') + ['status' => true]);
+            $token->delete();
+            return $this->ok();
+        }
     }
 }
