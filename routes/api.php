@@ -33,8 +33,11 @@ Route::middleware(AuthMiddleware::class)->group(function () {
     Route::apiResource('histories', HistoryController::class);
 
     Route::apiResource('users', UserController::class);
-    Route::post('users/membership-invitations', [UserController::class, 'membershipInvitations'])->name('users.membershipInvitations');
-    Route::post('users/subscription-completion', [UserController::class, 'subscriptionCompletion'])->name('users.subscriptionCompletion');
+
+    Route::name("users.")->prefix('users')->controller(UserController::class)->group(function () {
+        Route::post('membership-invitations', 'membershipInvitations')->name('membershipInvitations');
+        Route::post('subscription-completion', 'subscriptionCompletion')->name('subscriptionCompletion');
+    });
 });
 
 Route::post('setup', SetupController::class)->name('setup');
