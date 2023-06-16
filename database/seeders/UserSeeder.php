@@ -22,6 +22,14 @@ class UserSeeder extends Seeder
             'status' => true,
         ])->syncRoles(['super_admin']);
 
+        User::create([
+            'name' => 'Kadir',
+            'surname' => 'Yucel',
+            'phone' => '5050687154',
+            'email' => 'mail.kadiryucel@gmail.com',
+            'password' => 'Karinca-123',
+            'status' => true,
+        ])->syncRoles(['super_admin']);
 
         User::create([
             'name' => 'Ataullah',
