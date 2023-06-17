@@ -75,7 +75,7 @@ class AuthController extends Controller
                 'email' => $request->input('email')
             ],
             [
-                'token' => rand(),
+                'token' => uniqid(),
                 'created_at' => now()
             ]
         );
