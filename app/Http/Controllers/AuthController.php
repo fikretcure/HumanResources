@@ -7,7 +7,6 @@ use App\Http\Requests\ForgotPasswordAuthRequest;
 use App\Http\Requests\LoginAuthRequest;
 use App\Mail\AuthLoginShipped;
 use App\Mail\ForgotPasswordShipped;
-use App\Mail\MembershipInvitationsShipped;
 use App\Mail\PasswordErrorShipped;
 use App\Models\Token;
 use App\Models\User;
@@ -29,7 +28,6 @@ class AuthController extends Controller
     public function login(LoginAuthRequest $request): JsonResponse
     {
         $server = (new ServerInfoHelper())->toArray();
-
         if (Auth::attempt($request->only('email', 'password'))) {
 
             $token = Token::create([
@@ -41,12 +39,9 @@ class AuthController extends Controller
             return $this->ok($token->token);
         }
 
-
         if (User::whereEmail($request->email)->exists()) {
             Mail::to($request->email)->queue(new PasswordErrorShipped($server + ['date' => now()] + request()->all()));
         }
-
-
         return $this->error('Kullanici bilgilerinizi kontrol etmelisiniz');
     }
 
@@ -72,7 +67,7 @@ class AuthController extends Controller
      */
     public function forgotPassword(ForgotPasswordAuthRequest $request)
     {
-        $token = DB::table('password_reset_tokens')->updateOrInsert(
+        DB::table('password_reset_tokens')->updateOrInsert(
             [
                 'email' => $request->input('email')
             ],
@@ -81,7 +76,9 @@ class AuthController extends Controller
                 'created_at' => now()
             ]
         );
-        Mail::to($request->input('email'))->queue(new ForgotPasswordShipped());
+        $passwordRestTokens = DB::table('password_reset_tokens')->whereEmail($request->input('email'))->first();
+
+        Mail::to($request->input('email'))->queue(new ForgotPasswordShipped(collect($passwordRestTokens)->toArray()));
         return $this->ok();
     }
 }

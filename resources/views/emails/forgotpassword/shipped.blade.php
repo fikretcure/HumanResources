@@ -1,11 +1,9 @@
 <x-mail::message>
-# Introduction
+# Sifre Yenileme
 
-The body of your message.
+Baglantiya tiklayarak yeni sifrenizi belirleyebilirsiniz.
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+{{env('FRONT_TEST_URL')}}/forgot-password?token={{$data['token']}}
 
 Thanks,<br>
 {{ config('app.name') }}
