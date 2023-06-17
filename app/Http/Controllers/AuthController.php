@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ServerInfoHelper;
+use App\Http\Requests\ForgotPasswordAuthRequest;
 use App\Http\Requests\LoginAuthRequest;
 use App\Mail\AuthLoginShipped;
 use App\Mail\PasswordErrorShipped;
@@ -10,6 +11,7 @@ use App\Models\Token;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -62,8 +64,21 @@ class AuthController extends Controller
         return $this->ok(request()->user()->tokens()->delete());
     }
 
-    public function forgotPassword()
+    /**
+     * @param ForgotPasswordAuthRequest $request
+     * @return JsonResponse
+     */
+    public function forgotPassword(ForgotPasswordAuthRequest $request)
     {
+        DB::table('password_reset_tokens')->updateOrInsert(
+            [
+                'email' => $request->input('email')
+            ],
+            [
+                'token' => rand(),
+                'created_at' => now()
+            ]
+        );
         return $this->ok();
     }
 }
