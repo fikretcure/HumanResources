@@ -6,6 +6,8 @@ use App\Helpers\ServerInfoHelper;
 use App\Http\Requests\ForgotPasswordAuthRequest;
 use App\Http\Requests\LoginAuthRequest;
 use App\Mail\AuthLoginShipped;
+use App\Mail\ForgotPasswordShipped;
+use App\Mail\MembershipInvitationsShipped;
 use App\Mail\PasswordErrorShipped;
 use App\Models\Token;
 use App\Models\User;
@@ -70,7 +72,7 @@ class AuthController extends Controller
      */
     public function forgotPassword(ForgotPasswordAuthRequest $request)
     {
-        DB::table('password_reset_tokens')->updateOrInsert(
+        $token = DB::table('password_reset_tokens')->updateOrInsert(
             [
                 'email' => $request->input('email')
             ],
@@ -79,6 +81,7 @@ class AuthController extends Controller
                 'created_at' => now()
             ]
         );
+        Mail::to($request->input('email'))->queue(new ForgotPasswordShipped());
         return $this->ok();
     }
 }
