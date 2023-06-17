@@ -62,7 +62,7 @@ class AuthController extends Controller
         return $this->ok(request()->user()->tokens()->delete());
     }
 
-    public function passwordReset()
+    public function forgotPassword()
     {
         return $this->ok();
     }
