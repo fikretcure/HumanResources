@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(AuthMiddleware::class)->group(function () {
-    Route::name("auth.")->controller(AuthController::class)->group(function () {
-        Route::get('auth', 'auth')->name('show');
+    Route::name("auth.")->prefix('auth')->controller(AuthController::class)->group(function () {
+        Route::get(null, 'auth')->name('show');
         Route::post('logout', 'logout')->name('logout');
     });
 
@@ -42,9 +42,9 @@ Route::middleware(AuthMiddleware::class)->group(function () {
 Route::post('setup', SetupController::class)->name('setup');
 Route::post('backup', BackUpController::class)->name('backup');
 
-Route::name("auth.")->controller(AuthController::class)->group(function () {
+Route::name("auth.")->prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('login', 'login')->name('login');
-    Route::put('auth/password-reset', 'passwordReset')->name('passwordReset');
+    Route::put('password-reset', 'passwordReset')->name('passwordReset');
 });
 
 
