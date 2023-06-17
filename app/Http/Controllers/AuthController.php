@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -84,12 +85,25 @@ class AuthController extends Controller
         return $this->ok();
     }
 
+
     /**
      * @param SetPasswordAuthRequest $request
      * @return JsonResponse
      */
     public function setPassword(SetPasswordAuthRequest $request)
     {
+        $password = PasswordResetToken::whereToken($request->token)->latest()->first();
+        if (now()->greaterThan($password->created_at->addDays(7))) {
+            PasswordResetToken::whereToken($request->token)->delete();
+            return $this->error('Token suresi dolmustur');
+        }
+        PasswordResetToken::whereToken($request->token)->delete();
+
+        $user = User::whereEmail($password->email)->first();
+
+        $user->update([
+            'password' => $request->input('password')
+        ]);
         return $this->ok();
     }
 }
