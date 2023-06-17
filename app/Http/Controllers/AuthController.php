@@ -15,7 +15,6 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -84,7 +83,6 @@ class AuthController extends Controller
         Mail::to($request->input('email'))->queue(new ForgotPasswordShipped(collect($passwordRestTokens)->toArray()));
         return $this->ok();
     }
-
 
     /**
      * @param SetPasswordAuthRequest $request
