@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Helpers\ServerInfoHelper;
 use App\Http\Requests\ForgotPasswordAuthRequest;
 use App\Http\Requests\LoginAuthRequest;
+use App\Http\Requests\SetPasswordAuthRequest;
 use App\Mail\AuthLoginShipped;
 use App\Mail\ForgotPasswordShipped;
 use App\Mail\PasswordErrorShipped;
+use App\Models\PasswordResetToken;
 use App\Models\Token;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -79,6 +81,15 @@ class AuthController extends Controller
         $passwordRestTokens = DB::table('password_reset_tokens')->whereEmail($request->input('email'))->first();
 
         Mail::to($request->input('email'))->queue(new ForgotPasswordShipped(collect($passwordRestTokens)->toArray()));
+        return $this->ok();
+    }
+
+    /**
+     * @param SetPasswordAuthRequest $request
+     * @return JsonResponse
+     */
+    public function setPassword(SetPasswordAuthRequest $request)
+    {
         return $this->ok();
     }
 }

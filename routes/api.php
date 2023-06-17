@@ -45,6 +45,7 @@ Route::post('backup', BackUpController::class)->name('backup');
 Route::name("auth.")->prefix('auth')->controller(AuthController::class)->group(function () {
     Route::post('login', 'login')->name('login');
     Route::put('forgot-password', 'forgotPassword')->name('forgotPassword');
+    Route::put('set-password', 'setPassword')->name('setPassword');
 });
 
 
