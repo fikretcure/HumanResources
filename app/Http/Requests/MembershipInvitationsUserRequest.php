@@ -45,6 +45,11 @@ class MembershipInvitationsUserRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'users.*.sex' => [
+                'string',
+                'required',
+                Rule::in(['Bay', 'Bayan'])
+            ],
         ];
     }
 }
