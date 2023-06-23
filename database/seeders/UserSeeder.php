@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
             'status' => true,
             'sex' => 'Bay',
             'start_work' => now(),
-            'birth_at' => now()
+            'birth_at' => now(),
+            'position_id' => 4
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -34,7 +35,8 @@ class UserSeeder extends Seeder
             'status' => true,
             'sex' => 'Bay',
             'start_work' => now(),
-            'birth_at' => now()
+            'birth_at' => now(),
+            'position_id' => 4
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -46,8 +48,8 @@ class UserSeeder extends Seeder
             'status' => true,
             'sex' => 'Bayan',
             'start_work' => now(),
-            'birth_at' => now()
+            'birth_at' => now(),
+            'position_id' => 4
         ])->syncRoles(['hr_admin']);
-
     }
 }

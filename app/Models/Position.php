@@ -21,6 +21,7 @@ class Position extends Model
         'name',
         'parent_id',
         'department_id',
+        'is_multiple',
     ];
 
     /**

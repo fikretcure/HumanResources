@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->integer('parent_id')->nullable();
             $table->integer('department_id')->nullable();
+            $table->boolean('is_multiple')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
