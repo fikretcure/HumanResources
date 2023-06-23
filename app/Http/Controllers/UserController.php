@@ -75,4 +75,13 @@ class UserController extends Controller
         }
         return $this->ok(UserResource::collection($this->userRepository->all()));
     }
+
+    /**
+     * @param User $user
+     * @return JsonResponse
+     */
+    public function show(User $user): JsonResponse
+    {
+        return $this->ok(UserResource::make($user));
+    }
 }

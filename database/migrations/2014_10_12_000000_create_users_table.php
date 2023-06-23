@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->enum('sex', ['Bay', 'Bayan']);
             $table->date('start_work');
             $table->date('end_work')->nullable();
+            $table->foreignId('position_id')->nullable()->constrained();
             $table->softDeletes();
             $table->timestamps();
         });
