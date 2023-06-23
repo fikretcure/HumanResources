@@ -18,10 +18,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             "name" => $this->name,
             "surname" => $this->surname,
-            "phone" => $this->phone,
             "email" => $this->email,
             "status" => $this->status,
-            "birth_at" => $this->birth_at,
             "sex" => $this->sex,
             "start_work" => $this->start_work,
             "end_work" => $this->end_work,
@@ -31,6 +29,14 @@ class UserResource extends JsonResource
 
         if (auth()->user()->hasRole('super_admin')) {
             $data['salary'] = $this->salary;
+        }
+
+        if (auth()->user()->id == $this->id or auth()->user()->hasRole('super_admin')) {
+            $data['phone'] = $this->phone;
+            $data['birth_at'] = $this->birth_at;
+        } else {
+            $data['phone'] = null;
+            $data['birth_at'] = null;
         }
         return $data;
     }
