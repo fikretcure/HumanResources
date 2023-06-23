@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             "sex" => $this->sex,
             "start_work" => $this->start_work,
             "end_work" => $this->end_work,
+            'roles' => $this->getRoleNames()
         ];
     }
 }
