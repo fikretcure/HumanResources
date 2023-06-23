@@ -17,7 +17,7 @@ class PositionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'department' => $this->department,
+            'department' => \App\Http\ExtendResources\DepartmentResource::make($this->department),
             'created_at' => $this->created_at,
         ];
     }
