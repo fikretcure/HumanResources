@@ -50,6 +50,10 @@ class MembershipInvitationsUserRequest extends FormRequest
                 'required',
                 Rule::in(['Bay', 'Bayan'])
             ],
+            'users.*.start_work' => [
+                'date',
+                'required',
+            ],
         ];
     }
 }

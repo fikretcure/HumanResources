@@ -17,9 +17,11 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('status')->default(false);
+            $table->boolean('status');
             $table->integer('salary')->nullable()->default(0);
             $table->enum('sex', ['Bay', 'Bayan']);
+            $table->date('start_work');
+            $table->date('end_work')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

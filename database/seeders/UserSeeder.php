@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             'email' => 'info@fikretcure.dev',
             'password' => 'Karinca-123',
             'status' => true,
-            'sex' => 'Bay'
+            'sex' => 'Bay',
+            'start_work' => now()
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -30,7 +31,8 @@ class UserSeeder extends Seeder
             'email' => 'mail.kadiryucel@gmail.com',
             'password' => 'Karinca-123',
             'status' => true,
-            'sex' => 'Bay'
+            'sex' => 'Bay',
+            'start_work' => now()
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -40,7 +42,8 @@ class UserSeeder extends Seeder
             'email' => 'fikretcure@yandex.com.tr',
             'password' => 'Karinca-123',
             'status' => true,
-            'sex' => 'Bayan'
+            'sex' => 'Bayan',
+            'start_work' => now()
         ])->syncRoles(['hr_admin']);
 
     }
