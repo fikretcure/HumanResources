@@ -25,13 +25,13 @@ class UserResource extends JsonResource
             "sex" => $this->sex,
             "start_work" => $this->start_work,
             "end_work" => $this->end_work,
-            'roles' => $this->getRoleNames()
+            'roles' => $this->getRoleNames(),
+            'position' => PositionResource::make($this->position)
         ];
 
         if (auth()->user()->hasRole('super_admin')) {
             $data['salary'] = $this->salary;
         }
-
         return $data;
     }
 }
