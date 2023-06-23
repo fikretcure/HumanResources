@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MembershipInvitationsUserRequest;
 use App\Http\Requests\SubscriptionCompletionUserRequest;
+use App\Http\Resources\UserResource;
 use App\Mail\MembershipInvitationsShipped;
 use App\Models\MembershipInvitations;
 use App\Models\User;
@@ -62,5 +63,16 @@ class UserController extends Controller
             $token->delete();
             return $this->ok();
         }
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        if (request()->has('per_page')) {
+            return $this->okPaginate(UserResource::collection($this->userRepository->paginate()));
+        }
+        return $this->ok(UserResource::collection($this->userRepository->all()));
     }
 }
