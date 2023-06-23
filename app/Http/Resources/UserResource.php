@@ -14,7 +14,7 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             "name" => $this->name,
             "surname" => $this->surname,
@@ -27,5 +27,11 @@ class UserResource extends JsonResource
             "end_work" => $this->end_work,
             'roles' => $this->getRoleNames()
         ];
+
+        if (auth()->user()->hasRole('super_admin')) {
+            $data['salary'] = $this->salary;
+        }
+
+        return $data;
     }
 }
