@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
             'sex' => 'Bay',
-            'start_work' => now()
+            'start_work' => now(),
+            'birth_at' => now()
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -32,7 +33,8 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
             'sex' => 'Bay',
-            'start_work' => now()
+            'start_work' => now(),
+            'birth_at' => now()
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -43,7 +45,8 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
             'sex' => 'Bayan',
-            'start_work' => now()
+            'start_work' => now(),
+            'birth_at' => now()
         ])->syncRoles(['hr_admin']);
 
     }

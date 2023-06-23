@@ -54,6 +54,10 @@ class MembershipInvitationsUserRequest extends FormRequest
                 'date',
                 'required',
             ],
+            'users.*.birth_at' => [
+                'date',
+                'required',
+            ],
         ];
     }
 }

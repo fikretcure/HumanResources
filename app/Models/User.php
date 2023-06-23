@@ -28,7 +28,8 @@ class User extends Authenticatable
         'password',
         'status',
         'sex',
-        'start_work'
+        'start_work',
+        'birth_at'
     ];
 
     /**

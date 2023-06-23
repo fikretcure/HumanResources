@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('status');
+            $table->date('birth_at');
             $table->integer('salary')->nullable()->default(0);
             $table->enum('sex', ['Bay', 'Bayan']);
             $table->date('start_work');

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('token');
             $table->string('sex');
             $table->date('start_work');
+            $table->date('birth_at');
             $table->dateTime('expired_at');
             $table->timestamps();
         });
