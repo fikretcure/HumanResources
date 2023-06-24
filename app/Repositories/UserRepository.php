@@ -6,6 +6,7 @@ use App\Models\Position;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -50,13 +51,13 @@ class UserRepository extends Repository
         if (request()->has('order_by')) {
             $model = $model->orderBy(request()->get('order_by'), request()->has('sort') ? request()->get('sort') : 'asc');
         }
-
         if (request()->has('keyword')) {
             $model->OrWhere('name', 'like', '%' . request()->get('keyword') . '%');
             $model->OrWhere('surname', 'like', '%' . request()->get('keyword') . '%');
             $model->OrWhere('email', 'like', '%' . request()->get('keyword') . '%');
             $model->OrWhere('status', 'like', '%' . request()->get('keyword') . '%');
             $model->OrWhere('sex', 'like', '%' . request()->get('keyword') . '%');
+            $model->OrWhere(DB::raw('CONCAT(name, " ", surname)'), 'like', '%' . request()->get('keyword') . '%');
             //
             $with = $this->model->withWhereHas('position', function ($query) {
                 $query->where('name', 'like', '%' . request()->get('keyword') . '%');
