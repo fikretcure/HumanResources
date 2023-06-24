@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,7 +24,7 @@ class UserSeeder extends Seeder
             'sex' => 'Bay',
             'start_work' => now(),
             'birth_at' => now(),
-            'position_id' => 4
+            'position_id' => Position::inRandomOrder()->first()->id
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -36,7 +37,7 @@ class UserSeeder extends Seeder
             'sex' => 'Bay',
             'start_work' => now(),
             'birth_at' => now(),
-            'position_id' => 4
+            'position_id' => Position::inRandomOrder()->first()->id
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -49,7 +50,7 @@ class UserSeeder extends Seeder
             'sex' => 'Bayan',
             'start_work' => now(),
             'birth_at' => now(),
-            'position_id' => 4
+            'position_id' => Position::inRandomOrder()->first()->id
         ])->syncRoles(['hr_admin']);
     }
 }
