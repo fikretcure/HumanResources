@@ -36,7 +36,6 @@ class UserRepository extends Repository
         return $this->model->firstWhere('email', $email);
     }
 
-
     /**
      * @param $per_page
      * @return mixed
