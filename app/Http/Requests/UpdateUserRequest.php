@@ -79,6 +79,11 @@ class UpdateUserRequest extends FormRequest
                 'sometimes',
                 'numeric',
             ],
+            'position_id' => [
+                'sometimes',
+                'numeric',
+                Rule::exists(Position::class, 'id')
+            ]
         ];
     }
 }
