@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MembershipInvitationsUserRequest;
 use App\Http\Requests\SubscriptionCompletionUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Mail\MembershipInvitationsShipped;
 use App\Models\MembershipInvitations;
@@ -12,6 +13,8 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  *
@@ -29,7 +32,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:super_admin|hr_admin')->only('membershipInvitations');
+        $this->middleware('role:super_admin|hr_admin')->only('membershipInvitations', 'update');
         $this->userRepository = new UserRepository();
     }
 
@@ -67,6 +70,8 @@ class UserController extends Controller
 
     /**
      * @return JsonResponse
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function index(): JsonResponse
     {
@@ -83,5 +88,16 @@ class UserController extends Controller
     public function show(User $user): JsonResponse
     {
         return $this->ok(UserResource::make($user));
+    }
+
+    /**
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return JsonResponse
+     */
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
+    {
+        $this->userRepository->update($user->id, $request->validated());
+        return $this->ok($user->refresh());
     }
 }
