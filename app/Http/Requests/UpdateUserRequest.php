@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -62,6 +63,21 @@ class UpdateUserRequest extends FormRequest
             'end_work' => [
                 'sometimes',
                 'date_format:Y-m-d'
+            ],
+            'sex' => [
+                'sometimes',
+                Rule::in('Bay', 'Bayan')
+            ],
+            'roles' => [
+                'sometimes',
+                'array'
+            ],
+            'roles.*' => [
+                Rule::exists(Role::class, 'name')
+            ],
+            'salary' => [
+                'sometimes',
+                'numeric',
             ],
         ];
     }
