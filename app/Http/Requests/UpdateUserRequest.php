@@ -41,7 +41,28 @@ class UpdateUserRequest extends FormRequest
                 'sometimes',
                 'numeric',
                 Rule::unique(User::class)->ignore($this->user)
-            ]
+            ],
+            'email' => [
+                'sometimes',
+                'email:rfc,dns',
+                Rule::unique(User::class)->ignore($this->user)
+            ],
+            'status' => [
+                'sometimes',
+                'boolean'
+            ],
+            'birth_at' => [
+                'sometimes',
+                'date_format:Y-m-d'
+            ],
+            'start_work' => [
+                'sometimes',
+                'date_format:Y-m-d'
+            ],
+            'end_work' => [
+                'sometimes',
+                'date_format:Y-m-d'
+            ],
         ];
     }
 }
