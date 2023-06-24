@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Route;
 
 class UserResource extends JsonResource
 {
@@ -31,12 +32,14 @@ class UserResource extends JsonResource
             $data['salary'] = $this->salary;
         }
 
-        if (auth()->user()->id == $this->id or auth()->user()->hasRole('super_admin')) {
+        if (Route::currentRouteName() == 'users.index' and auth()->user()->hasRole('super_admin')) {
             $data['phone'] = $this->phone;
             $data['birth_at'] = $this->birth_at;
-        } else {
-            $data['phone'] = null;
-            $data['birth_at'] = null;
+        }
+
+        if (auth()->user()->id == $this->id and Route::currentRouteName() == 'users.show') {
+            $data['phone'] = $this->phone;
+            $data['birth_at'] = $this->birth_at;
         }
         return $data;
     }
