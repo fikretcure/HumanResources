@@ -51,6 +51,6 @@ class UserSeeder extends Seeder
             'start_work' => now(),
             'birth_at' => now(),
             'position_id' => Position::inRandomOrder()->first()->id
-        ])->syncRoles(['hr_admin']);
+        ]);
     }
 }
