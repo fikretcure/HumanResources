@@ -57,11 +57,17 @@ class UserRepository extends Repository
             $model->OrWhere('email', 'like', '%' . request()->get('keyword') . '%');
             $model->OrWhere('status', 'like', '%' . request()->get('keyword') . '%');
             $model->OrWhere('sex', 'like', '%' . request()->get('keyword') . '%');
-
+            //
             $with = $this->model->withWhereHas('position', function ($query) {
                 $query->where('name', 'like', '%' . request()->get('keyword') . '%');
             })->pluck('id');
             $model->OrWhereIn('id', $with);
+            //
+            $with_2 = $this->model->withWhereHas('position.department', function ($query) {
+                $query->where('name', 'like', '%' . request()->get('keyword') . '%');
+            })->pluck('id');
+
+            $model->OrWhereIn('id', $with_2);
         }
 
         return $model->paginate($per_page);
