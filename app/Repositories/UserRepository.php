@@ -2,10 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Position;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
