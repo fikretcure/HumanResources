@@ -69,11 +69,12 @@ class UpdateUserRequest extends FormRequest
                 Rule::in('Bay', 'Bayan')
             ],
             'roles' => [
-                'sometimes',
+                'filled',
                 'array'
             ],
             'roles.*' => [
-                Rule::exists(Role::class, 'name')
+                Rule::exists(Role::class, 'name'),
+                Rule::notIn('super_admin')
             ],
             'salary' => [
                 'sometimes',
