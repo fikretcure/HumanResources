@@ -98,6 +98,8 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $this->userRepository->update($user->id, collect($request->validated())->except('roles')->toArray());
+        $user->syncRoles($request->roles);
+
         return $this->ok(UserResource::make($user->refresh()));
     }
 }
