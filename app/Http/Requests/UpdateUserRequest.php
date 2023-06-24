@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Department;
 use App\Models\Position;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -27,7 +28,19 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => [
+                'sometimes',
                 'string',
+                Rule::notIn('null')
+            ],
+            'surname' => [
+                'sometimes',
+                'string',
+                Rule::notIn('null')
+            ],
+            'phone' => [
+                'sometimes',
+                'numeric',
+                Rule::unique(User::class)->ignore($this->user)
             ]
         ];
     }
