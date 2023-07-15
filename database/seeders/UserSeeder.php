@@ -22,9 +22,9 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
             'sex' => 'Bay',
-            'start_work' => now(),
             'birth_at' => now(),
-            'position_id' => Position::inRandomOrder()->first()->id
+            'position_id' => Position::inRandomOrder()->first()->id,
+            'identity_number' => rand()
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -35,9 +35,9 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
             'sex' => 'Bay',
-            'start_work' => now(),
             'birth_at' => now(),
-            'position_id' => Position::inRandomOrder()->first()->id
+            'position_id' => Position::inRandomOrder()->first()->id,
+            'identity_number' => rand()
         ])->syncRoles(['super_admin']);
 
         User::create([
@@ -48,9 +48,9 @@ class UserSeeder extends Seeder
             'password' => 'Karinca-123',
             'status' => true,
             'sex' => 'Bayan',
-            'start_work' => now(),
             'birth_at' => now(),
-            'position_id' => Position::inRandomOrder()->first()->id
+            'position_id' => Position::inRandomOrder()->first()->id,
+            'identity_number' => rand()
         ]);
     }
 }

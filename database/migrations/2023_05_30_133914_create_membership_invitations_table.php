@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('token');
             $table->string('sex');
+            $table->integer('identity_number');
             $table->date('start_work');
             $table->date('birth_at');
             $table->dateTime('expired_at');

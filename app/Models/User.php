@@ -33,7 +33,8 @@ class User extends Authenticatable
         'status',
         'sex',
         'start_work',
-        'birth_at'
+        'birth_at',
+        'identity_number'
     ];
 
     /**
